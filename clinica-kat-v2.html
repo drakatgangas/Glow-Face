@@ -1,0 +1,1014 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dra. Kat Gangast · Gestión Clínica</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@3.19.0/dist/tabler-icons.min.css">
+<style>
+:root{
+  --gold:#C9A84C;--gold-light:#F0E0A0;--gold-pale:#FDF8EC;
+  --blush:#F9F0F3;--sage:#F0F4F0;
+  --bg:#FAFAF8;--bg2:#FFFFFF;--bg3:#F5F3EF;
+  --text:#2C2A26;--text2:#7A7570;--text3:#B0AAA2;
+  --border:#E8E4DC;--border2:#D4CEC4;
+  --radius:12px;--radius-sm:8px;
+  --kin:#4A90D9;--kin-light:#EBF3FC;--kin-pale:#F0F7FF;
+  --lua:#C97BB2;--lua-light:#F7EDF4;--lua-pale:#FDF4FB;
+  --propia:#6BBF8E;--propia-light:#EBF7F0;--propia-pale:#F2FAF5;
+  --shadow:0 2px 12px rgba(0,0,0,0.06);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{min-height:100vh;background:var(--bg);color:var(--text);font-family:'Inter','Helvetica Neue',Arial,sans-serif;font-size:14px}
+/* Layout */
+#app{max-width:980px;margin:0 auto;padding:0 0 4rem}
+header{background:var(--bg2);border-bottom:1px solid var(--border);padding:1rem 1.5rem;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:50}
+.logo-wrap{display:flex;align-items:center;gap:12px}
+.logo-badge{width:36px;height:36px;background:linear-gradient(135deg,var(--gold),var(--gold-light));border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:700;color:#fff;letter-spacing:0.5px}
+.logo-text{font-size:14px;font-weight:600;color:var(--text);letter-spacing:0.3px}
+.logo-sub{font-size:11px;color:var(--text2);margin-top:1px}
+nav{background:var(--bg2);border-bottom:1px solid var(--border);display:flex;gap:2px;padding:.5rem 1rem;overflow-x:auto}
+.nav-btn{background:transparent;border:none;color:var(--text2);padding:8px 14px;border-radius:var(--radius-sm);font-size:12px;font-weight:500;cursor:pointer;white-space:nowrap;transition:all .15s;display:flex;align-items:center;gap:6px;font-family:inherit}
+.nav-btn:hover{background:var(--bg3);color:var(--text)}
+.nav-btn.active{background:var(--gold-pale);color:var(--gold);font-weight:600}
+.nav-btn.active .ti{color:var(--gold)}
+/* Secciones */
+.section{display:none;padding:1.5rem}
+.section.active{display:block}
+/* Tipografía */
+h2{font-size:18px;font-weight:700;color:var(--text);margin-bottom:1.25rem;letter-spacing:-0.3px}
+h3{font-size:13px;font-weight:600;color:var(--text2);text-transform:uppercase;letter-spacing:1px;margin-bottom:.75rem}
+/* Cards */
+.card{background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius);padding:1.25rem;margin-bottom:1rem;box-shadow:var(--shadow)}
+/* Grid */
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+.grid3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:.75rem}
+.grid4{display:grid;grid-template-columns:repeat(4,1fr);gap:.75rem}
+/* Forms */
+.field{margin-bottom:.75rem}
+label{font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.8px;color:var(--text2);display:block;margin-bottom:4px}
+input,select,textarea{width:100%;background:var(--bg3);border:1px solid var(--border);color:var(--text);padding:9px 12px;border-radius:var(--radius-sm);font-size:13px;font-family:inherit;outline:none;transition:border-color .15s}
+input:focus,select:focus,textarea:focus{border-color:var(--gold);background:#fff}
+select option{background:#fff}
+textarea{resize:vertical;min-height:70px}
+/* Botones */
+.btn{background:var(--gold);border:none;color:#fff;padding:9px 18px;border-radius:var(--radius-sm);font-size:12px;font-weight:600;cursor:pointer;font-family:inherit;transition:all .15s;display:inline-flex;align-items:center;gap:6px;letter-spacing:0.3px}
+.btn:hover{background:#B8973E;transform:translateY(-1px)}
+.btn-outline{background:transparent;border:1.5px solid var(--border2);color:var(--text2);padding:8px 16px}
+.btn-outline:hover{border-color:var(--gold);color:var(--gold);background:var(--gold-pale);transform:none}
+.btn-sm{padding:6px 12px;font-size:11px}
+.btn-danger{background:#fff;border:1.5px solid #FFCDD2;color:#E53935}
+.btn-danger:hover{background:#FFEBEE;transform:none}
+.btn-ghost{background:transparent;border:none;color:var(--text2);padding:6px 10px}
+.btn-ghost:hover{background:var(--bg3);color:var(--text);transform:none}
+/* Tags y badges */
+.tag{display:inline-flex;align-items:center;gap:4px;font-size:11px;font-weight:600;padding:3px 9px;border-radius:20px;letter-spacing:0.3px}
+.tag-gold{background:var(--gold-pale);color:var(--gold)}
+.tag-green{background:#E8F5E9;color:#388E3C}
+.tag-red{background:#FFEBEE;color:#E53935}
+.tag-blue{background:#E3F2FD;color:#1976D2}
+.tag-purple{background:#F3E5F5;color:#7B1FA2}
+.tag-kin{background:var(--kin-light);color:var(--kin)}
+.tag-lua{background:var(--lua-light);color:var(--lua)}
+.tag-propia{background:var(--propia-light);color:var(--propia)}
+/* Clínica indicator */
+.clinic-dot{width:8px;height:8px;border-radius:50%;display:inline-block;flex-shrink:0}
+.dot-kin{background:var(--kin)}
+.dot-lua{background:var(--lua)}
+.dot-propia{background:var(--propia)}
+/* Utils */
+.row{display:flex;align-items:center;justify-content:space-between;gap:.75rem}
+.divider{border:none;border-top:1px solid var(--border);margin:1rem 0}
+.empty{text-align:center;padding:2.5rem;color:var(--text3);font-size:13px}
+.empty .ti{font-size:32px;display:block;margin-bottom:.5rem;color:var(--text3)}
+/* Stats */
+.stat-card{background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius);padding:1rem 1.25rem;box-shadow:var(--shadow)}
+.stat-num{font-size:24px;font-weight:700;color:var(--text);margin-bottom:2px}
+.stat-lbl{font-size:11px;color:var(--text2);font-weight:500;text-transform:uppercase;letter-spacing:.8px}
+/* Calendario */
+.cal-nav{display:flex;align-items:center;gap:1rem;margin-bottom:1rem}
+.cal-title{font-size:16px;font-weight:700;color:var(--text);flex:1;text-align:center;letter-spacing:-0.2px}
+.cal-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:3px;margin-bottom:1rem}
+.cal-day-hdr{text-align:center;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:var(--text3);padding:6px 0}
+.cal-day{min-height:72px;background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius-sm);padding:5px;cursor:pointer;transition:all .15s;overflow:hidden}
+.cal-day:hover{border-color:var(--gold);background:var(--gold-pale)}
+.cal-day.today{border-color:var(--gold);border-width:2px}
+.cal-day.selected{background:var(--gold-pale);border-color:var(--gold)}
+.cal-day.other-month{opacity:.35;background:var(--bg3)}
+.cal-day-num{font-size:11px;font-weight:600;color:var(--text2);margin-bottom:3px}
+.cal-day.today .cal-day-num{color:var(--gold)}
+.cal-event{font-size:9px;font-weight:600;border-radius:3px;padding:1px 4px;margin-bottom:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;line-height:1.4}
+.cal-event-kin{background:var(--kin-light);color:var(--kin)}
+.cal-event-lua{background:var(--lua-light);color:var(--lua)}
+.cal-event-propia{background:var(--propia-light);color:var(--propia)}
+/* Citas */
+.appt-item{background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius);padding:1rem 1.25rem;margin-bottom:.5rem;cursor:pointer;transition:all .15s;display:flex;align-items:center;gap:12px;box-shadow:var(--shadow)}
+.appt-item:hover{border-color:var(--gold);transform:translateY(-1px)}
+.appt-time-badge{background:var(--gold-pale);color:var(--gold);font-size:12px;font-weight:700;padding:6px 10px;border-radius:var(--radius-sm);min-width:52px;text-align:center;flex-shrink:0}
+/* Pacientes */
+.patient-item{background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius);padding:1rem 1.25rem;margin-bottom:.5rem;cursor:pointer;display:flex;align-items:center;gap:12px;transition:all .15s;box-shadow:var(--shadow)}
+.patient-item:hover{border-color:var(--gold);transform:translateY(-1px)}
+.avatar{width:40px;height:40px;border-radius:50%;background:var(--gold-pale);border:2px solid var(--gold-light);display:flex;align-items:center;justify-content:center;color:var(--gold);font-size:13px;font-weight:700;flex-shrink:0}
+/* Search */
+.search-wrap{position:relative;margin-bottom:1rem}
+.search-wrap input{padding-left:36px;background:#fff}
+.search-ico{position:absolute;left:11px;top:50%;transform:translateY(-50%);color:var(--text3);font-size:16px;pointer-events:none}
+/* Insumos */
+.insumo-row{background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius);padding:1rem 1.25rem;margin-bottom:.5rem;cursor:pointer;transition:all .15s;box-shadow:var(--shadow)}
+.insumo-row:hover{border-color:var(--gold);transform:translateY(-1px)}
+.stock-bar-bg{background:var(--bg3);border-radius:4px;height:5px;width:100%;margin-top:6px}
+.stock-bar{height:5px;border-radius:4px;transition:width .3s}
+.ganancia-pill{display:inline-flex;align-items:center;gap:4px;font-size:11px;font-weight:700;padding:3px 9px;border-radius:20px;background:#E8F5E9;color:#388E3C}
+/* Mensajes */
+.msg-card{background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius);padding:1.25rem;margin-bottom:.75rem;box-shadow:var(--shadow);cursor:pointer;transition:all .15s}
+.msg-card:hover{border-color:var(--gold);transform:translateY(-1px)}
+.msg-preview{font-size:12px;color:var(--text2);margin-top:.5rem;line-height:1.6;white-space:pre-wrap;background:var(--bg3);border-radius:var(--radius-sm);padding:.75rem}
+/* Modales */
+.modal-bg{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.4);z-index:200;align-items:flex-start;justify-content:center;padding:2rem 1rem;overflow-y:auto;backdrop-filter:blur(2px)}
+.modal-bg.open{display:flex}
+.modal{background:#fff;border-radius:var(--radius);padding:1.75rem;width:100%;max-width:620px;margin:auto;box-shadow:0 20px 60px rgba(0,0,0,0.15)}
+.modal-title{font-size:16px;font-weight:700;color:var(--text);margin-bottom:1.25rem;display:flex;align-items:center;gap:8px}
+.flex-end{display:flex;gap:.5rem;justify-content:flex-end;margin-top:1.25rem}
+/* Clinic legend */
+.clinic-legend{display:flex;gap:1rem;margin-bottom:1rem;flex-wrap:wrap}
+.clinic-legend-item{display:flex;align-items:center;gap:5px;font-size:11px;font-weight:600;color:var(--text2)}
+/* Whatsapp button */
+.wa-btn{background:#25D366;color:#fff;border:none;padding:8px 16px;border-radius:var(--radius-sm);font-size:12px;font-weight:600;cursor:pointer;display:inline-flex;align-items:center;gap:6px;font-family:inherit;transition:all .15s}
+.wa-btn:hover{background:#1EBE5A;transform:translateY(-1px)}
+/* Tabs dentro de sección */
+.sub-tabs{display:flex;gap:4px;margin-bottom:1.25rem;border-bottom:1px solid var(--border);padding-bottom:0}
+.sub-tab{background:transparent;border:none;border-bottom:2px solid transparent;color:var(--text2);padding:8px 14px;font-size:12px;font-weight:600;cursor:pointer;font-family:inherit;transition:all .15s;margin-bottom:-1px}
+.sub-tab.active{color:var(--gold);border-bottom-color:var(--gold)}
+/* Proc rows */
+.proc-grid{display:grid;grid-template-columns:1fr 1fr 2fr auto;gap:6px;margin-bottom:6px;align-items:start}
+.budget-item-grid{display:grid;grid-template-columns:2fr 70px 120px auto;gap:6px;margin-bottom:6px;align-items:start}
+@media(max-width:640px){
+  .grid2,.grid3,.grid4{grid-template-columns:1fr}
+  .proc-grid,.budget-item-grid{grid-template-columns:1fr 1fr}
+  .cal-event{display:none}
+}
+</style>
+</head>
+<body>
+<div id="app">
+
+<header>
+  <div class="logo-wrap">
+    <div class="logo-badge">K</div>
+    <div>
+      <div class="logo-text">Dra. Kat Gangast</div>
+      <div class="logo-sub">Medicina Estética · Concepción</div>
+    </div>
+  </div>
+  <div style="font-size:11px;color:var(--text2)" id="hdr-date"></div>
+</header>
+
+<nav>
+  <button class="nav-btn active" onclick="showSection('agenda',this)"><i class="ti ti-calendar"></i> Agenda</button>
+  <button class="nav-btn" onclick="showSection('pacientes',this)"><i class="ti ti-users"></i> Pacientes</button>
+  <button class="nav-btn" onclick="showSection('insumos',this)"><i class="ti ti-package"></i> Insumos</button>
+  <button class="nav-btn" onclick="showSection('presupuestos',this)"><i class="ti ti-receipt"></i> Presupuestos</button>
+  <button class="nav-btn" onclick="showSection('mensajes',this)"><i class="ti ti-message-circle"></i> Mensajes</button>
+</nav>
+
+<!-- ===== AGENDA ===== -->
+<div class="section active" id="sec-agenda">
+  <div class="row" style="margin-bottom:1rem">
+    <h2 style="margin:0">Agenda</h2>
+    <button class="btn" onclick="openNewAppt()"><i class="ti ti-plus"></i> Nueva cita</button>
+  </div>
+  <div class="clinic-legend">
+    <div class="clinic-legend-item"><span class="clinic-dot dot-kin"></span> Kinelawen</div>
+    <div class="clinic-legend-item"><span class="clinic-dot dot-lua"></span> Lua Bai</div>
+    <div class="clinic-legend-item"><span class="clinic-dot dot-propia"></span> Consulta propia</div>
+  </div>
+  <div class="card" style="padding:1rem">
+    <div class="cal-nav">
+      <button class="btn-ghost btn" onclick="changeMonth(-1)" style="padding:6px 10px"><i class="ti ti-arrow-left"></i></button>
+      <div class="cal-title" id="cal-title"></div>
+      <button class="btn-ghost btn" onclick="changeMonth(1)" style="padding:6px 10px"><i class="ti ti-arrow-right"></i></button>
+    </div>
+    <div class="cal-grid" id="cal-grid"></div>
+  </div>
+  <div class="row" style="margin-bottom:.75rem">
+    <div style="font-size:13px;font-weight:600;color:var(--text)" id="day-title"></div>
+    <button class="btn btn-sm btn-outline" onclick="openNewAppt()"><i class="ti ti-plus"></i> Agregar</button>
+  </div>
+  <div id="day-appts"></div>
+</div>
+
+<!-- ===== PACIENTES ===== -->
+<div class="section" id="sec-pacientes">
+  <div class="row" style="margin-bottom:1rem">
+    <h2 style="margin:0">Fichas clínicas</h2>
+    <button class="btn" onclick="openNewPatient()"><i class="ti ti-plus"></i> Nueva ficha</button>
+  </div>
+  <div class="search-wrap">
+    <i class="ti ti-search search-ico"></i>
+    <input type="text" id="patient-search" placeholder="Buscar por nombre o teléfono..." oninput="renderPatients()">
+  </div>
+  <div id="patient-list"></div>
+</div>
+
+<!-- ===== INSUMOS ===== -->
+<div class="section" id="sec-insumos">
+  <div class="row" style="margin-bottom:1rem">
+    <h2 style="margin:0">Insumos & stock</h2>
+    <button class="btn" onclick="openNewInsumo()"><i class="ti ti-plus"></i> Agregar insumo</button>
+  </div>
+  <div class="grid4" id="insumo-stats" style="margin-bottom:1.25rem"></div>
+  <div class="sub-tabs">
+    <button class="sub-tab active" onclick="filterInsumos('todos',this)">Todos</button>
+    <button class="sub-tab" onclick="filterInsumos('bajo',this)">⚠ Stock bajo</button>
+    <button class="sub-tab" onclick="filterInsumos('Rellenos HA',this)">Rellenos HA</button>
+    <button class="sub-tab" onclick="filterInsumos('Biostimuladores',this)">Biostimuladores</button>
+    <button class="sub-tab" onclick="filterInsumos('Toxina botulínica',this)">Toxina</button>
+  </div>
+  <div id="insumo-list"></div>
+</div>
+
+<!-- ===== PRESUPUESTOS ===== -->
+<div class="section" id="sec-presupuestos">
+  <div class="row" style="margin-bottom:1rem">
+    <h2 style="margin:0">Presupuestos</h2>
+    <button class="btn" onclick="openNewBudget()"><i class="ti ti-plus"></i> Nuevo</button>
+  </div>
+  <div class="grid3" id="budget-stats" style="margin-bottom:1.25rem"></div>
+  <div id="budget-list"></div>
+</div>
+
+<!-- ===== MENSAJES ===== -->
+<div class="section" id="sec-mensajes">
+  <div class="row" style="margin-bottom:1rem">
+    <h2 style="margin:0">Mensajes</h2>
+    <button class="btn" onclick="openNewMsg()"><i class="ti ti-plus"></i> Nuevo mensaje</button>
+  </div>
+  <div class="sub-tabs">
+    <button class="sub-tab active" onclick="filterMsgs('todos',this)">Todos</button>
+    <button class="sub-tab" onclick="filterMsgs('Recordatorio',this)">Recordatorio</button>
+    <button class="sub-tab" onclick="filterMsgs('Confirmación',this)">Confirmación</button>
+    <button class="sub-tab" onclick="filterMsgs('Post procedimiento',this)">Post procedimiento</button>
+    <button class="sub-tab" onclick="filterMsgs('Promoción',this)">Promoción</button>
+  </div>
+  <div style="background:var(--blush);border-radius:var(--radius);padding:1rem;margin-bottom:1rem;font-size:12px;color:var(--text2)">
+    <i class="ti ti-info-circle"></i> Selecciona un paciente y un mensaje para enviar por WhatsApp. Los mensajes se personalizan con el nombre del paciente automáticamente.
+  </div>
+  <div class="grid2" style="margin-bottom:1rem">
+    <div class="field">
+      <label>Enviar a paciente</label>
+      <select id="msg-patient-select"><option value="">Seleccionar paciente...</option></select>
+    </div>
+    <div class="field">
+      <label>Filtrar por categoría</label>
+      <select onchange="filterMsgs(this.value,null)">
+        <option value="todos">Todos</option>
+        <option value="Recordatorio">Recordatorio</option>
+        <option value="Confirmación">Confirmación</option>
+        <option value="Post procedimiento">Post procedimiento</option>
+        <option value="Promoción">Promoción</option>
+      </select>
+    </div>
+  </div>
+  <div id="msg-list"></div>
+</div>
+
+</div><!-- #app -->
+
+<!-- ===== MODAL CITA ===== -->
+<div class="modal-bg" id="modal-appt">
+<div class="modal">
+  <div class="modal-title"><i class="ti ti-calendar" style="color:var(--gold)"></i> <span id="appt-modal-title">Nueva cita</span></div>
+  <div class="field">
+    <label>Paciente</label>
+    <select id="appt-patient"></select>
+  </div>
+  <div class="grid2">
+    <div class="field"><label>Fecha</label><input type="date" id="appt-date"></div>
+    <div class="field"><label>Hora</label><input type="time" id="appt-time" value="09:00"></div>
+  </div>
+  <div class="field">
+    <label>Clínica</label>
+    <select id="appt-clinic" onchange="updateClinicColor()">
+      <option value="kinelawen">🔵 Kinelawen</option>
+      <option value="lua">🟣 Lua Bai</option>
+      <option value="propia">🟢 Consulta propia</option>
+    </select>
+  </div>
+  <div class="field">
+    <label>Procedimiento</label>
+    <select id="appt-proc">
+      <option>Toxina botulínica</option><option>Ácido hialurónico</option>
+      <option>Sculptra</option><option>Juvelook / PDRN</option>
+      <option>Morpheus8</option><option>CO2 láser</option>
+      <option>HydraFacial</option><option>Rhinomodelación</option>
+      <option>Consulta / Evaluación</option><option>Otro</option>
+    </select>
+  </div>
+  <div class="field">
+    <label>Estado</label>
+    <select id="appt-status">
+      <option value="confirmada">✅ Confirmada</option>
+      <option value="pendiente">⏳ Pendiente</option>
+      <option value="cancelada">❌ Cancelada</option>
+      <option value="realizada">⭐ Realizada</option>
+    </select>
+  </div>
+  <div class="field"><label>Notas</label><textarea id="appt-notes" placeholder="Observaciones, indicaciones previas..."></textarea></div>
+  <div class="flex-end">
+    <button class="btn btn-sm btn-danger" onclick="deleteAppt()" id="del-appt-btn" style="display:none"><i class="ti ti-trash"></i> Eliminar</button>
+    <button class="btn btn-sm btn-outline" onclick="closeModal('modal-appt')">Cancelar</button>
+    <button class="btn btn-sm" onclick="saveAppt()"><i class="ti ti-check"></i> Guardar</button>
+  </div>
+</div>
+</div>
+
+<!-- ===== MODAL PACIENTE ===== -->
+<div class="modal-bg" id="modal-patient">
+<div class="modal">
+  <div class="modal-title"><i class="ti ti-user" style="color:var(--gold)"></i> <span id="patient-modal-title">Nueva ficha clínica</span></div>
+  <div class="grid2">
+    <div class="field"><label>Nombre completo</label><input type="text" id="p-name" placeholder="Nombre Apellido"></div>
+    <div class="field"><label>RUT</label><input type="text" id="p-rut" placeholder="12.345.678-9"></div>
+  </div>
+  <div class="grid2">
+    <div class="field"><label>Fecha de nacimiento</label><input type="date" id="p-dob"></div>
+    <div class="field"><label>Teléfono / WhatsApp</label><input type="text" id="p-phone" placeholder="+56 9 XXXX XXXX"></div>
+  </div>
+  <div class="grid2">
+    <div class="field"><label>Email</label><input type="email" id="p-email" placeholder="correo@email.com"></div>
+    <div class="field"><label>Instagram</label><input type="text" id="p-ig" placeholder="@usuario"></div>
+  </div>
+  <hr class="divider">
+  <h3>Anamnesis</h3>
+  <div class="grid2">
+    <div class="field"><label>Fototipo Fitzpatrick</label>
+    <select id="p-fitz"><option value="">—</option><option>I</option><option>II</option><option>III</option><option>IV</option><option>V</option><option>VI</option></select></div>
+    <div class="field"><label>Alergias conocidas</label><input type="text" id="p-alergias" placeholder="Ej: lidocaína, látex..."></div>
+  </div>
+  <div class="field"><label>Antecedentes médicos relevantes</label>
+  <textarea id="p-antecedentes" placeholder="HTA, DM2, anticoagulantes, embarazo, queloides..."></textarea></div>
+  <div class="field"><label>Medicamentos / suplementos actuales</label>
+  <textarea id="p-medicamentos" placeholder="Incluir vitamina E, omega 3, AAS..."></textarea></div>
+  <div class="field"><label>Tratamientos estéticos previos</label>
+  <textarea id="p-previos" placeholder="Filler previo, toxina, biostimuladores, cirugías..."></textarea></div>
+  <hr class="divider">
+  <h3>Historial de procedimientos</h3>
+  <div id="p-procedures-list"></div>
+  <button class="btn btn-sm btn-outline" onclick="addProcedureRow()" style="margin-bottom:.75rem"><i class="ti ti-plus"></i> Agregar procedimiento</button>
+  <hr class="divider">
+  <div class="field"><label>Notas clínicas / plan de tratamiento</label>
+  <textarea id="p-notas" placeholder="Plan de sesiones, consentimientos, fotografías..."></textarea></div>
+  <div class="flex-end">
+    <button class="btn btn-sm btn-danger" onclick="deletePatient()" id="del-patient-btn" style="display:none"><i class="ti ti-trash"></i> Eliminar</button>
+    <button class="btn btn-sm btn-outline" onclick="closeModal('modal-patient')">Cancelar</button>
+    <button class="btn btn-sm" onclick="savePatient()"><i class="ti ti-check"></i> Guardar ficha</button>
+  </div>
+</div>
+</div>
+
+<!-- ===== MODAL INSUMO ===== -->
+<div class="modal-bg" id="modal-insumo">
+<div class="modal">
+  <div class="modal-title"><i class="ti ti-package" style="color:var(--gold)"></i> <span id="insumo-modal-title">Nuevo insumo</span></div>
+  <div class="field"><label>Nombre del producto</label><input type="text" id="i-name" placeholder="Ej: Juvederm Voluma 1ml"></div>
+  <div class="grid2">
+    <div class="field"><label>Categoría</label>
+    <select id="i-cat">
+      <option>Rellenos HA</option><option>Biostimuladores</option>
+      <option>Toxina botulínica</option><option>PDRN / Polynucleotides</option>
+      <option>Material estéril</option><option>Anestesia</option>
+      <option>Skincare / Cosmética</option><option>Equipos / Consumibles</option><option>Otro</option>
+    </select></div>
+    <div class="field"><label>Unidad</label>
+    <select id="i-unit"><option>unidad</option><option>ml</option><option>vial</option><option>caja</option><option>jeringa</option><option>ampolla</option></select></div>
+  </div>
+  <div class="grid2">
+    <div class="field"><label>Stock actual</label><input type="number" id="i-stock" value="0" min="0"></div>
+    <div class="field"><label>Stock mínimo (alerta)</label><input type="number" id="i-min" value="2" min="0"></div>
+  </div>
+  <hr class="divider">
+  <h3>Precios y ganancias por clínica</h3>
+  <div class="field"><label>Costo del insumo (CLP)</label><input type="number" id="i-cost" value="0" min="0" oninput="calcGanancias()"></div>
+  <div class="card" style="background:var(--propia-pale);border-color:var(--propia-light);margin-bottom:.75rem">
+    <div style="font-size:11px;font-weight:700;color:var(--propia);margin-bottom:.5rem;text-transform:uppercase;letter-spacing:.8px">🟢 Consulta propia</div>
+    <div class="field" style="margin-bottom:.5rem"><label>Precio de venta (CLP)</label><input type="number" id="i-price-propia" value="0" min="0" oninput="calcGanancias()"></div>
+    <div id="gan-propia" style="font-size:12px;color:var(--propia);font-weight:600"></div>
+  </div>
+  <div class="card" style="background:var(--kin-pale);border-color:var(--kin-light);margin-bottom:.75rem">
+    <div style="font-size:11px;font-weight:700;color:var(--kin);margin-bottom:.5rem;text-transform:uppercase;letter-spacing:.8px">🔵 Kinelawen <span style="font-weight:400;opacity:.7">(descuento 50% clínica)</span></div>
+    <div class="field" style="margin-bottom:.5rem"><label>Precio de venta (CLP)</label><input type="number" id="i-price-kin" value="0" min="0" oninput="calcGanancias()"></div>
+    <div id="gan-kin" style="font-size:12px;color:var(--kin);font-weight:600"></div>
+  </div>
+  <div class="card" style="background:var(--lua-pale);border-color:var(--lua-light);margin-bottom:.75rem">
+    <div style="font-size:11px;font-weight:700;color:var(--lua);margin-bottom:.5rem;text-transform:uppercase;letter-spacing:.8px">🟣 Lua Bai <span style="font-weight:400;opacity:.7">(tarifa fija por servicio)</span></div>
+    <div class="field" style="margin-bottom:.5rem"><label>Tarifa que recibes (CLP)</label><input type="number" id="i-price-lua" value="0" min="0" oninput="calcGanancias()"></div>
+    <div id="gan-lua" style="font-size:12px;color:var(--lua);font-weight:600"></div>
+  </div>
+  <div class="grid2">
+    <div class="field"><label>Proveedor</label><input type="text" id="i-supplier" placeholder="Ej: Allergan Chile"></div>
+    <div class="field"><label>Notas (lote, vencimiento)</label><input type="text" id="i-notes" placeholder="Lote: XXX — Vence: 12/2026"></div>
+  </div>
+  <div class="flex-end">
+    <button class="btn btn-sm btn-danger" onclick="deleteInsumo()" id="del-insumo-btn" style="display:none"><i class="ti ti-trash"></i> Eliminar</button>
+    <button class="btn btn-sm btn-outline" onclick="closeModal('modal-insumo')">Cancelar</button>
+    <button class="btn btn-sm" onclick="saveInsumo()"><i class="ti ti-check"></i> Guardar</button>
+  </div>
+</div>
+</div>
+
+<!-- ===== MODAL PRESUPUESTO ===== -->
+<div class="modal-bg" id="modal-budget">
+<div class="modal">
+  <div class="modal-title"><i class="ti ti-receipt" style="color:var(--gold)"></i> <span id="budget-modal-title">Nuevo presupuesto</span></div>
+  <div class="grid2">
+    <div class="field"><label>Paciente</label><select id="b-patient"></select></div>
+    <div class="field"><label>Fecha</label><input type="date" id="b-date"></div>
+  </div>
+  <div class="field"><label>Clínica</label>
+  <select id="b-clinic">
+    <option value="propia">🟢 Consulta propia</option>
+    <option value="kinelawen">🔵 Kinelawen</option>
+    <option value="lua">🟣 Lua Bai</option>
+  </select></div>
+  <hr class="divider">
+  <h3>Ítems</h3>
+  <div id="budget-items"></div>
+  <button class="btn btn-sm btn-outline" onclick="addBudgetItem()" style="margin-bottom:.75rem"><i class="ti ti-plus"></i> Agregar ítem</button>
+  <hr class="divider">
+  <div class="row">
+    <span style="font-size:13px;font-weight:600;color:var(--text2)">Total</span>
+    <span style="font-size:22px;font-weight:700;color:var(--gold)" id="b-total">$0</span>
+  </div>
+  <div class="grid2" style="margin-top:.75rem">
+    <div class="field"><label>Estado</label>
+    <select id="b-status">
+      <option value="pendiente">Pendiente</option><option value="aprobado">Aprobado</option>
+      <option value="rechazado">Rechazado</option><option value="pagado">Pagado</option>
+    </select></div>
+    <div class="field"><label>Forma de pago</label>
+    <select id="b-payment">
+      <option value="">—</option><option>Efectivo</option><option>Transferencia</option>
+      <option>Débito</option><option>Crédito</option><option>Cuotas</option>
+    </select></div>
+  </div>
+  <div class="field"><label>Notas / condiciones</label><textarea id="b-notes" placeholder="Validez, indicaciones post, condiciones..."></textarea></div>
+  <div class="flex-end">
+    <button class="btn btn-sm btn-danger" onclick="deleteBudget()" id="del-budget-btn" style="display:none"><i class="ti ti-trash"></i> Eliminar</button>
+    <button class="btn btn-sm btn-outline" onclick="closeModal('modal-budget')">Cancelar</button>
+    <button class="btn btn-sm" onclick="saveBudget()"><i class="ti ti-check"></i> Guardar</button>
+  </div>
+</div>
+</div>
+
+<!-- ===== MODAL MENSAJE ===== -->
+<div class="modal-bg" id="modal-msg">
+<div class="modal">
+  <div class="modal-title"><i class="ti ti-message-circle" style="color:var(--gold)"></i> <span id="msg-modal-title">Nuevo mensaje</span></div>
+  <div class="grid2">
+    <div class="field"><label>Nombre del mensaje</label><input type="text" id="m-name" placeholder="Ej: Recordatorio 24h"></div>
+    <div class="field"><label>Categoría</label>
+    <select id="m-cat">
+      <option>Recordatorio</option><option>Confirmación</option>
+      <option>Post procedimiento</option><option>Promoción</option><option>Otro</option>
+    </select></div>
+  </div>
+  <div class="field">
+    <label>Texto del mensaje</label>
+    <textarea id="m-body" style="min-height:140px" placeholder="Hola {nombre}, te recordamos tu cita mañana...&#10;&#10;Usa {nombre} para insertar el nombre del paciente automáticamente."></textarea>
+  </div>
+  <div style="font-size:11px;color:var(--text2);background:var(--gold-pale);border-radius:var(--radius-sm);padding:.75rem;margin-bottom:.75rem">
+    <strong>Variable disponible:</strong> <code style="background:#fff;padding:2px 6px;border-radius:4px">{nombre}</code> — se reemplaza por el nombre del paciente al enviar.
+  </div>
+  <div class="flex-end">
+    <button class="btn btn-sm btn-danger" onclick="deleteMsg()" id="del-msg-btn" style="display:none"><i class="ti ti-trash"></i> Eliminar</button>
+    <button class="btn btn-sm btn-outline" onclick="closeModal('modal-msg')">Cancelar</button>
+    <button class="btn btn-sm" onclick="saveMsg()"><i class="ti ti-check"></i> Guardar</button>
+  </div>
+</div>
+</div>
+
+<script>
+const MONTHS=['Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'];
+const DAYS=['Dom','Lun','Mar','Mié','Jue','Vie','Sáb'];
+const CLINIC_LABELS={kinelawen:'Kinelawen',lua:'Lua Bai',propia:'Consulta propia'};
+const CLINIC_TAGS={kinelawen:'tag-kin',lua:'tag-lua',propia:'tag-propia'};
+const today=new Date();
+let calYear=today.getFullYear(),calMonth=today.getMonth();
+let selDate=today.toISOString().split('T')[0];
+let editApptId=null,editPatientId=null,editInsumoId=null,editBudgetId=null,editMsgId=null;
+let tempProcedures=[],tempBudgetItems=[],currentInsumoFilter='todos',currentMsgFilter='todos';
+
+function load(k){try{return JSON.parse(localStorage.getItem('dka_'+k)||'[]')}catch{return[]}}
+function save(k,v){localStorage.setItem('dka_'+k,JSON.stringify(v))}
+function uid(){return Date.now().toString(36)+Math.random().toString(36).slice(2,6)}
+function fmtCLP(n){return '$'+(Math.round(n||0)).toLocaleString('es-CL')}
+function pct(n){return Math.round(n||0)+'%'}
+
+document.getElementById('hdr-date').textContent=today.toLocaleDateString('es-CL',{weekday:'long',day:'numeric',month:'long',year:'numeric'});
+
+// Init mensajes predeterminados si no existen
+function initDefaultMsgs(){
+  if(load('msgs').length>0)return;
+  const defaults=[
+    {id:uid(),name:'Recordatorio de cita',cat:'Recordatorio',body:'Hola {nombre} 🌸 Te recordamos que mañana tienes tu cita con la Dra. Kat Gangast. Por favor llega sin maquillaje en la zona a tratar. Ante cualquier consulta escríbenos. ¡Te esperamos!'},
+    {id:uid(),name:'Confirmación de cita',cat:'Confirmación',body:'Hola {nombre} ✨ Tu cita está confirmada con la Dra. Kat Gangast. Te enviaremos un recordatorio el día anterior. Si necesitas reagendar, escríbenos con al menos 24 horas de anticipación. ¡Nos vemos pronto!'},
+    {id:uid(),name:'Post procedimiento - Toxina',cat:'Post procedimiento',body:'Hola {nombre} 💛 Gracias por tu visita hoy. Recuerda las indicaciones post toxina:\n\n• No recostarte durante 4 horas\n• No hacer ejercicio intenso en 24h\n• No frotarte la zona tratada\n• El efecto final se verá en 10-14 días\n\nCualquier consulta, escríbeme. ¡Te verás increíble! 🌟'},
+    {id:uid(),name:'Post procedimiento - Filler',cat:'Post procedimiento',body:'Hola {nombre} 💛 Gracias por tu confianza hoy. Indicaciones post relleno:\n\n• Evita presionar o masajear la zona\n• No realizar actividad física por 24h\n• Aplica frío local si hay inflamación\n• Evita sauna o calor intenso por 1 semana\n\nRecuerda que la inflamación inicial es normal. ¡Cualquier duda, escríbeme! 💕'},
+    {id:uid(),name:'Difusión Sculptra Day',cat:'Promoción',body:'Hola {nombre} ✨ Este mes tenemos fechas especiales para Sculptra, el biostimulador de colágeno que restaura estructura facial de manera progresiva y natural. Si te interesa agendar tu evaluación gratuita, escríbeme. ¡Los cupos son limitados! 💛'},
+    {id:uid(),name:'Difusión general evaluación',cat:'Promoción',body:'Hola {nombre} 🌸 Te cuento que tenemos fechas disponibles para evaluaciones gratuitas de medicina estética. Es el momento ideal para conversar sobre lo que te gustaría mejorar y armar un plan personalizado. Sin compromiso. ¿Te gustaría agendar? 💕'}
+  ];
+  save('msgs',defaults);
+}
+
+/* ---- Nav ---- */
+function showSection(id,btn){
+  document.querySelectorAll('.section').forEach(s=>s.classList.remove('active'));
+  document.querySelectorAll('.nav-btn').forEach(b=>b.classList.remove('active'));
+  document.getElementById('sec-'+id).classList.add('active');
+  if(btn)btn.classList.add('active');
+  if(id==='agenda')renderCal();
+  if(id==='pacientes')renderPatients();
+  if(id==='insumos')renderInsumos();
+  if(id==='presupuestos')renderBudgets();
+  if(id==='mensajes'){fillMsgPatientSelect();renderMsgs();}
+}
+function closeModal(id){document.getElementById(id).classList.remove('open')}
+
+/* ======== AGENDA ======== */
+function renderCal(){
+  document.getElementById('cal-title').textContent=MONTHS[calMonth]+' '+calYear;
+  const first=new Date(calYear,calMonth,1).getDay();
+  const days=new Date(calYear,calMonth+1,0).getDate();
+  const appts=load('appts');
+  const todayStr=today.toISOString().split('T')[0];
+  let html='';
+  DAYS.forEach(d=>{html+=`<div class="cal-day-hdr">${d}</div>`});
+  for(let i=0;i<first;i++)html+=`<div class="cal-day other-month"></div>`;
+  for(let d=1;d<=days;d++){
+    const ds=`${calYear}-${String(calMonth+1).padStart(2,'0')}-${String(d).padStart(2,'0')}`;
+    const cls=[ds===todayStr?'today':'',ds===selDate?'selected':''].filter(Boolean).join(' ');
+    const dayAppts=appts.filter(a=>a.date===ds).sort((a,b)=>a.time.localeCompare(b.time));
+    const events=dayAppts.slice(0,3).map(a=>`<div class="cal-event cal-event-${a.clinic||'propia'}">${a.time} ${a.proc?a.proc.split(' ')[0]:''}</div>`).join('');
+    const more=dayAppts.length>3?`<div style="font-size:9px;color:var(--text3)">+${dayAppts.length-3} más</div>`:'';
+    html+=`<div class="cal-day ${cls}" onclick="selectDay('${ds}')"><div class="cal-day-num">${d}</div>${events}${more}</div>`;
+  }
+  document.getElementById('cal-grid').innerHTML=html;
+  renderDayAppts();
+}
+function selectDay(d){selDate=d;renderCal()}
+function changeMonth(dir){
+  calMonth+=dir;
+  if(calMonth>11){calMonth=0;calYear++}else if(calMonth<0){calMonth=11;calYear--}
+  renderCal();
+}
+function renderDayAppts(){
+  const patients=load('patients');
+  const appts=load('appts').filter(a=>a.date===selDate).sort((a,b)=>a.time.localeCompare(b.time));
+  const d=new Date(selDate+'T12:00');
+  document.getElementById('day-title').textContent=d.toLocaleDateString('es-CL',{weekday:'long',day:'numeric',month:'long'});
+  const stLabels={confirmada:'Confirmada',pendiente:'Pendiente',cancelada:'Cancelada',realizada:'Realizada'};
+  const stTags={confirmada:'tag-gold',pendiente:'tag-blue',cancelada:'tag-red',realizada:'tag-green'};
+  document.getElementById('day-appts').innerHTML=appts.length?appts.map(a=>{
+    const p=patients.find(x=>x.id===a.patientId);
+    const cl=a.clinic||'propia';
+    return`<div class="appt-item" onclick="openEditAppt('${a.id}')">
+      <div class="appt-time-badge">${a.time}</div>
+      <span class="clinic-dot dot-${cl}" style="flex-shrink:0"></span>
+      <div style="flex:1;min-width:0">
+        <div style="font-weight:600;font-size:13px">${p?p.name:'—'}</div>
+        <div style="font-size:12px;color:var(--text2);margin-top:2px">${a.proc} · <span class="tag ${CLINIC_TAGS[cl]}">${CLINIC_LABELS[cl]}</span></div>
+        ${a.notes?`<div style="font-size:11px;color:var(--text3);margin-top:3px">${a.notes}</div>`:''}
+      </div>
+      <span class="tag ${stTags[a.status]||'tag-gold'}">${stLabels[a.status]||a.status}</span>
+    </div>`}).join('')
+    :'<div class="empty"><i class="ti ti-calendar-off"></i>Sin citas para este día</div>';
+}
+function fillPatientSelects(){
+  const opts='<option value="">Seleccionar paciente...</option>'+load('patients').map(p=>`<option value="${p.id}">${p.name}</option>`).join('');
+  ['appt-patient','b-patient'].forEach(id=>document.getElementById(id).innerHTML=opts);
+}
+function openNewAppt(){
+  editApptId=null;
+  document.getElementById('appt-modal-title').textContent='Nueva cita';
+  document.getElementById('del-appt-btn').style.display='none';
+  document.getElementById('appt-date').value=selDate;
+  document.getElementById('appt-time').value='09:00';
+  document.getElementById('appt-notes').value='';
+  document.getElementById('appt-status').value='confirmada';
+  document.getElementById('appt-clinic').value='propia';
+  fillPatientSelects();
+  document.getElementById('modal-appt').classList.add('open');
+}
+function openEditAppt(id){
+  const a=load('appts').find(x=>x.id===id);if(!a)return;
+  editApptId=id;
+  document.getElementById('appt-modal-title').textContent='Editar cita';
+  document.getElementById('del-appt-btn').style.display='inline-flex';
+  fillPatientSelects();
+  setTimeout(()=>{
+    document.getElementById('appt-patient').value=a.patientId;
+    document.getElementById('appt-clinic').value=a.clinic||'propia';
+  },0);
+  document.getElementById('appt-date').value=a.date;
+  document.getElementById('appt-time').value=a.time;
+  document.getElementById('appt-proc').value=a.proc;
+  document.getElementById('appt-status').value=a.status;
+  document.getElementById('appt-notes').value=a.notes||'';
+  document.getElementById('modal-appt').classList.add('open');
+}
+function saveAppt(){
+  if(!document.getElementById('appt-patient').value){alert('Selecciona un paciente');return}
+  if(!document.getElementById('appt-date').value){alert('Selecciona una fecha');return}
+  const appts=load('appts');
+  const a={id:editApptId||uid(),patientId:document.getElementById('appt-patient').value,
+    date:document.getElementById('appt-date').value,time:document.getElementById('appt-time').value,
+    proc:document.getElementById('appt-proc').value,status:document.getElementById('appt-status').value,
+    clinic:document.getElementById('appt-clinic').value,notes:document.getElementById('appt-notes').value};
+  if(editApptId){const i=appts.findIndex(x=>x.id===editApptId);appts[i]=a}else appts.push(a);
+  save('appts',appts);closeModal('modal-appt');selDate=a.date;renderCal();
+}
+function deleteAppt(){
+  if(!confirm('¿Eliminar esta cita?'))return;
+  save('appts',load('appts').filter(a=>a.id!==editApptId));
+  closeModal('modal-appt');renderCal();
+}
+
+/* ======== PACIENTES ======== */
+function renderPatients(){
+  const q=(document.getElementById('patient-search').value||'').toLowerCase();
+  const list=load('patients').filter(p=>!q||p.name.toLowerCase().includes(q)||(p.phone||'').includes(q));
+  if(!list.length){document.getElementById('patient-list').innerHTML='<div class="empty"><i class="ti ti-users"></i>Sin pacientes registrados</div>';return}
+  document.getElementById('patient-list').innerHTML=list.map(p=>{
+    const initials=p.name.split(' ').map(w=>w[0]).slice(0,2).join('').toUpperCase();
+    const age=p.dob?Math.floor((new Date()-new Date(p.dob))/31557600000)+'a':'';
+    const procs=load('appts').filter(a=>a.patientId===p.id).length;
+    return`<div class="patient-item" onclick="openEditPatient('${p.id}')">
+      <div class="avatar">${initials}</div>
+      <div style="flex:1;min-width:0">
+        <div style="font-weight:600;font-size:13px">${p.name}</div>
+        <div style="font-size:12px;color:var(--text2);margin-top:2px">${[age,p.phone].filter(Boolean).join(' · ')}</div>
+      </div>
+      <div style="text-align:right;flex-shrink:0;display:flex;flex-direction:column;align-items:flex-end;gap:4px">
+        <span style="font-size:11px;color:var(--text3)">${procs} citas</span>
+        ${p.alergias?`<span class="tag tag-red"><i class="ti ti-alert-triangle"></i> alergias</span>`:''}
+      </div>
+      <i class="ti ti-chevron-right" style="color:var(--text3);flex-shrink:0"></i>
+    </div>`}).join('');
+}
+function openNewPatient(){
+  editPatientId=null;tempProcedures=[];
+  document.getElementById('patient-modal-title').textContent='Nueva ficha clínica';
+  document.getElementById('del-patient-btn').style.display='none';
+  ['p-name','p-rut','p-phone','p-email','p-ig','p-alergias','p-antecedentes','p-previos','p-medicamentos','p-notas'].forEach(id=>document.getElementById(id).value='');
+  document.getElementById('p-dob').value='';document.getElementById('p-fitz').value='';
+  renderProcedureRows();
+  document.getElementById('modal-patient').classList.add('open');
+}
+function openEditPatient(id){
+  const p=load('patients').find(x=>x.id===id);if(!p)return;
+  editPatientId=id;tempProcedures=[...(p.procedures||[])];
+  document.getElementById('patient-modal-title').textContent='Ficha — '+p.name;
+  document.getElementById('del-patient-btn').style.display='inline-flex';
+  ['name','rut','phone','email','ig','alergias','antecedentes','previos','medicamentos','notas'].forEach(k=>{
+    const el=document.getElementById('p-'+k);if(el)el.value=p[k]||'';
+  });
+  document.getElementById('p-dob').value=p.dob||'';
+  document.getElementById('p-fitz').value=p.fitz||'';
+  renderProcedureRows();
+  document.getElementById('modal-patient').classList.add('open');
+}
+function renderProcedureRows(){
+  const PROCS=['Toxina botulínica','Ácido hialurónico','Sculptra','Juvelook / PDRN','Morpheus8','CO2 láser','HydraFacial','Rhinomodelación','Otro'];
+  document.getElementById('p-procedures-list').innerHTML=tempProcedures.map((pr,i)=>`
+    <div class="proc-grid" style="margin-bottom:6px">
+      <input type="date" value="${pr.date||''}" onchange="tempProcedures[${i}].date=this.value" style="margin:0">
+      <select onchange="tempProcedures[${i}].proc=this.value" style="margin:0">${PROCS.map(o=>`<option${pr.proc===o?' selected':''}>${o}</option>`).join('')}</select>
+      <input type="text" value="${pr.notes||''}" placeholder="Producto, zona, unidades..." onchange="tempProcedures[${i}].notes=this.value" style="margin:0">
+      <button class="btn btn-sm btn-danger" onclick="tempProcedures.splice(${i},1);renderProcedureRows()" style="padding:5px 8px;margin:0"><i class="ti ti-trash"></i></button>
+    </div>`).join('');
+}
+function addProcedureRow(){
+  tempProcedures.push({date:today.toISOString().split('T')[0],proc:'Toxina botulínica',notes:''});
+  renderProcedureRows();
+}
+function savePatient(){
+  if(!document.getElementById('p-name').value.trim()){alert('Ingresa el nombre del paciente');return}
+  const patients=load('patients');
+  const p={id:editPatientId||uid(),name:document.getElementById('p-name').value,rut:document.getElementById('p-rut').value,
+    phone:document.getElementById('p-phone').value,email:document.getElementById('p-email').value,
+    ig:document.getElementById('p-ig').value,dob:document.getElementById('p-dob').value,
+    fitz:document.getElementById('p-fitz').value,alergias:document.getElementById('p-alergias').value,
+    antecedentes:document.getElementById('p-antecedentes').value,previos:document.getElementById('p-previos').value,
+    medicamentos:document.getElementById('p-medicamentos').value,notas:document.getElementById('p-notas').value,
+    procedures:tempProcedures};
+  if(editPatientId){const i=patients.findIndex(x=>x.id===editPatientId);patients[i]=p}else patients.push(p);
+  save('patients',patients);closeModal('modal-patient');renderPatients();
+}
+function deletePatient(){
+  if(!confirm('¿Eliminar esta ficha clínica?'))return;
+  save('patients',load('patients').filter(p=>p.id!==editPatientId));
+  closeModal('modal-patient');renderPatients();
+}
+
+/* ======== INSUMOS ======== */
+function calcGanancias(){
+  const costo=parseInt(document.getElementById('i-cost').value)||0;
+  const propia=parseInt(document.getElementById('i-price-propia').value)||0;
+  const kin=parseInt(document.getElementById('i-price-kin').value)||0;
+  const lua=parseInt(document.getElementById('i-price-lua').value)||0;
+
+  const ganPropia=propia-costo;
+  const ganKin=kin-costo-(kin*0.5);
+  const ganLua=lua;
+
+  const pctPropia=propia>0?Math.round((ganPropia/propia)*100):0;
+  const pctKin=kin>0?Math.round((ganKin/kin)*100):0;
+
+  document.getElementById('gan-propia').innerHTML=`Ganancia: <strong>${fmtCLP(ganPropia)}</strong> (${pctPropia}% del precio)`;
+  document.getElementById('gan-kin').innerHTML=`Ganancia: <strong>${fmtCLP(ganKin)}</strong> — Descuento clínica: ${fmtCLP(kin*0.5)} (${pctKin}% del precio)`;
+  document.getElementById('gan-lua').innerHTML=`Tarifa que recibes: <strong>${fmtCLP(ganLua)}</strong> (tarifa fija, sin descuento de insumo)`;
+}
+function filterInsumos(f,btn){
+  currentInsumoFilter=f;
+  if(btn){document.querySelectorAll('.sub-tab').forEach(t=>t.classList.remove('active'));btn.classList.add('active')}
+  renderInsumos();
+}
+function renderInsumos(){
+  let insumos=load('insumos');
+  const bajo=insumos.filter(i=>i.stock<=i.min).length;
+  const valor=insumos.reduce((s,i)=>(s+(i.stock||0)*(i.cost||0)),0);
+  const totalGanPropia=insumos.reduce((s,i)=>{const p=i.pricePropia||0;const c=i.cost||0;return s+(p-c)},0);
+
+  document.getElementById('insumo-stats').innerHTML=`
+    <div class="stat-card"><div class="stat-num">${insumos.length}</div><div class="stat-lbl">productos</div></div>
+    <div class="stat-card"><div class="stat-num" style="color:${bajo?'#E53935':'#388E3C'}">${bajo}</div><div class="stat-lbl">stock bajo</div></div>
+    <div class="stat-card"><div class="stat-num" style="font-size:15px">${fmtCLP(valor)}</div><div class="stat-lbl">valor inventario</div></div>
+    <div class="stat-card"><div class="stat-num" style="font-size:15px;color:#388E3C">${fmtCLP(totalGanPropia)}</div><div class="stat-lbl">ganancia potencial</div></div>`;
+
+  if(currentInsumoFilter==='bajo')insumos=insumos.filter(i=>i.stock<=i.min);
+  else if(currentInsumoFilter!=='todos')insumos=insumos.filter(i=>i.cat===currentInsumoFilter);
+
+  if(!insumos.length){document.getElementById('insumo-list').innerHTML='<div class="empty"><i class="ti ti-package"></i>Sin insumos en esta categoría</div>';return}
+  const cats=[...new Set(insumos.map(i=>i.cat))].sort();
+  document.getElementById('insumo-list').innerHTML=cats.map(cat=>`
+    <div style="margin-bottom:1.25rem">
+      <h3>${cat}</h3>
+      ${insumos.filter(i=>i.cat===cat).map(i=>{
+        const pct2=i.min>0?Math.min(100,Math.round((i.stock/i.min)*50)):100;
+        const barC=i.stock<=i.min?'#E53935':i.stock<=i.min*2?'#F9A825':'#388E3C';
+        const ganPropia=(i.pricePropia||0)-(i.cost||0);
+        const ganKin=(i.priceKin||0)-(i.cost||0)-((i.priceKin||0)*0.5);
+        return`<div class="insumo-row" onclick="openEditInsumo('${i.id}')">
+          <div class="row" style="margin-bottom:6px">
+            <div>
+              <span style="font-weight:600;font-size:13px">${i.name}</span>
+              ${i.supplier?`<span style="font-size:11px;color:var(--text3);margin-left:8px">${i.supplier}</span>`:''}
+            </div>
+            <div style="display:flex;align-items:center;gap:6px">
+              <span style="font-size:13px;font-weight:600">${i.stock} ${i.unit}</span>
+              ${i.stock<=i.min?'<span class="tag tag-red">⚠ bajo</span>':''}
+            </div>
+          </div>
+          <div class="stock-bar-bg"><div class="stock-bar" style="width:${pct2}%;background:${barC}"></div></div>
+          <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:.5rem;margin-top:.6rem">
+            <div style="font-size:11px">
+              <div style="color:var(--text3);margin-bottom:2px">Costo</div>
+              <div style="font-weight:600">${fmtCLP(i.cost)}</div>
+            </div>
+            <div style="font-size:11px">
+              <div style="color:var(--propia);margin-bottom:2px">🟢 Propia</div>
+              <div style="font-weight:600">${fmtCLP(i.pricePropia)} <span class="ganancia-pill">${fmtCLP(ganPropia)}</span></div>
+            </div>
+            <div style="font-size:11px">
+              <div style="color:var(--kin);margin-bottom:2px">🔵 Kin</div>
+              <div style="font-weight:600">${fmtCLP(i.priceKin)} <span class="ganancia-pill" style="background:#EBF3FC;color:var(--kin)">${fmtCLP(ganKin)}</span></div>
+            </div>
+          </div>
+          ${i.priceLua?`<div style="font-size:11px;margin-top:4px"><span style="color:var(--lua)">🟣 Lua Bai tarifa:</span> <strong>${fmtCLP(i.priceLua)}</strong></div>`:''}
+          ${i.notes?`<div style="font-size:11px;color:var(--text3);margin-top:4px">${i.notes}</div>`:''}
+        </div>`}).join('')}
+    </div>`).join('');
+}
+function openNewInsumo(){
+  editInsumoId=null;
+  document.getElementById('insumo-modal-title').textContent='Nuevo insumo';
+  document.getElementById('del-insumo-btn').style.display='none';
+  ['i-name','i-supplier','i-notes'].forEach(id=>document.getElementById(id).value='');
+  ['i-stock','i-min','i-cost','i-price-propia','i-price-kin','i-price-lua'].forEach(id=>document.getElementById(id).value=0);
+  document.getElementById('gan-propia').innerHTML='';
+  document.getElementById('gan-kin').innerHTML='';
+  document.getElementById('gan-lua').innerHTML='';
+  document.getElementById('modal-insumo').classList.add('open');
+}
+function openEditInsumo(id){
+  const i=load('insumos').find(x=>x.id===id);if(!i)return;
+  editInsumoId=id;
+  document.getElementById('insumo-modal-title').textContent='Editar — '+i.name;
+  document.getElementById('del-insumo-btn').style.display='inline-flex';
+  document.getElementById('i-name').value=i.name;
+  document.getElementById('i-cat').value=i.cat;
+  document.getElementById('i-unit').value=i.unit;
+  document.getElementById('i-stock').value=i.stock;
+  document.getElementById('i-min').value=i.min;
+  document.getElementById('i-cost').value=i.cost;
+  document.getElementById('i-price-propia').value=i.pricePropia||0;
+  document.getElementById('i-price-kin').value=i.priceKin||0;
+  document.getElementById('i-price-lua').value=i.priceLua||0;
+  document.getElementById('i-supplier').value=i.supplier||'';
+  document.getElementById('i-notes').value=i.notes||'';
+  calcGanancias();
+  document.getElementById('modal-insumo').classList.add('open');
+}
+function saveInsumo(){
+  if(!document.getElementById('i-name').value.trim()){alert('Ingresa el nombre del producto');return}
+  const insumos=load('insumos');
+  const item={id:editInsumoId||uid(),name:document.getElementById('i-name').value,
+    cat:document.getElementById('i-cat').value,unit:document.getElementById('i-unit').value,
+    stock:parseInt(document.getElementById('i-stock').value)||0,min:parseInt(document.getElementById('i-min').value)||0,
+    cost:parseInt(document.getElementById('i-cost').value)||0,
+    pricePropia:parseInt(document.getElementById('i-price-propia').value)||0,
+    priceKin:parseInt(document.getElementById('i-price-kin').value)||0,
+    priceLua:parseInt(document.getElementById('i-price-lua').value)||0,
+    supplier:document.getElementById('i-supplier').value,notes:document.getElementById('i-notes').value};
+  if(editInsumoId){const i=insumos.findIndex(x=>x.id===editInsumoId);insumos[i]=item}else insumos.push(item);
+  save('insumos',insumos);closeModal('modal-insumo');renderInsumos();
+}
+function deleteInsumo(){
+  if(!confirm('¿Eliminar este insumo?'))return;
+  save('insumos',load('insumos').filter(i=>i.id!==editInsumoId));
+  closeModal('modal-insumo');renderInsumos();
+}
+
+/* ======== PRESUPUESTOS ======== */
+function renderBudgets(){
+  const budgets=load('budgets');const patients=load('patients');
+  const total=budgets.reduce((s,b)=>s+b.items.reduce((ss,it)=>ss+(it.qty||1)*(it.price||0),0),0);
+  const aprobados=budgets.filter(b=>b.status==='aprobado'||b.status==='pagado').length;
+  document.getElementById('budget-stats').innerHTML=`
+    <div class="stat-card"><div class="stat-num">${budgets.length}</div><div class="stat-lbl">presupuestos</div></div>
+    <div class="stat-card"><div class="stat-num">${aprobados}</div><div class="stat-lbl">aprobados</div></div>
+    <div class="stat-card"><div class="stat-num" style="font-size:15px">${fmtCLP(total)}</div><div class="stat-lbl">total cotizado</div></div>`;
+  if(!budgets.length){document.getElementById('budget-list').innerHTML='<div class="empty"><i class="ti ti-receipt"></i>Sin presupuestos registrados</div>';return}
+  const stTags={pendiente:'tag-blue',aprobado:'tag-gold',rechazado:'tag-red',pagado:'tag-green'};
+  const stLabels={pendiente:'Pendiente',aprobado:'Aprobado',rechazado:'Rechazado',pagado:'Pagado'};
+  document.getElementById('budget-list').innerHTML=[...budgets].reverse().map(b=>{
+    const p=patients.find(pt=>pt.id===b.patientId);
+    const tot=b.items.reduce((s,it)=>s+(it.qty||1)*(it.price||0),0);
+    const cl=b.clinic||'propia';
+    return`<div class="insumo-row" onclick="openEditBudget('${b.id}')">
+      <div class="row" style="margin-bottom:6px">
+        <div style="display:flex;align-items:center;gap:8px">
+          <span class="clinic-dot dot-${cl}"></span>
+          <span style="font-weight:600;font-size:13px">${p?p.name:'Paciente'}</span>
+        </div>
+        <span style="font-size:18px;font-weight:700;color:var(--gold)">${fmtCLP(tot)}</span>
+      </div>
+      <div style="font-size:12px;color:var(--text2);display:flex;align-items:center;gap:6px;flex-wrap:wrap">
+        <span>${b.date||''}</span>
+        <span class="tag ${CLINIC_TAGS[cl]}">${CLINIC_LABELS[cl]}</span>
+        <span class="tag ${stTags[b.status]||'tag-blue'}">${stLabels[b.status]||b.status}</span>
+        ${b.payment?`<span style="color:var(--text3)">${b.payment}</span>`:''}
+      </div>
+      ${b.items.length?`<div style="font-size:11px;color:var(--text3);margin-top:6px">${b.items.map(it=>`${it.desc||'—'} ×${it.qty||1}`).join(' · ')}</div>`:''}
+    </div>`}).join('');
+}
+let tempBudgetItems=[];
+function renderBudgetItems(){
+  document.getElementById('budget-items').innerHTML=tempBudgetItems.length?tempBudgetItems.map((it,i)=>`
+    <div class="budget-item-grid">
+      <input type="text" value="${it.desc||''}" placeholder="Ej: Sculptra 2 viales" onchange="tempBudgetItems[${i}].desc=this.value" style="margin:0">
+      <input type="number" value="${it.qty||1}" min="1" onchange="tempBudgetItems[${i}].qty=+this.value;calcBudgetTotal()" style="margin:0">
+      <input type="number" value="${it.price||0}" min="0" placeholder="Precio CLP" onchange="tempBudgetItems[${i}].price=+this.value;calcBudgetTotal()" style="margin:0">
+      <button class="btn btn-sm btn-danger" onclick="tempBudgetItems.splice(${i},1);renderBudgetItems()" style="padding:5px 8px;margin:0"><i class="ti ti-trash"></i></button>
+    </div>`).join(''):'<div style="font-size:12px;color:var(--text3);padding:.5rem 0">Sin ítems aún</div>';
+  calcBudgetTotal();
+}
+function addBudgetItem(){tempBudgetItems.push({desc:'',qty:1,price:0});renderBudgetItems()}
+function calcBudgetTotal(){
+  const t=tempBudgetItems.reduce((s,it)=>s+(it.qty||1)*(it.price||0),0);
+  document.getElementById('b-total').textContent=fmtCLP(t);
+}
+function openNewBudget(){
+  editBudgetId=null;tempBudgetItems=[];
+  document.getElementById('budget-modal-title').textContent='Nuevo presupuesto';
+  document.getElementById('del-budget-btn').style.display='none';
+  document.getElementById('b-date').value=today.toISOString().split('T')[0];
+  document.getElementById('b-notes').value='';
+  document.getElementById('b-status').value='pendiente';
+  document.getElementById('b-payment').value='';
+  fillPatientSelects();renderBudgetItems();
+  document.getElementById('modal-budget').classList.add('open');
+}
+function openEditBudget(id){
+  const b=load('budgets').find(x=>x.id===id);if(!b)return;
+  editBudgetId=id;tempBudgetItems=[...b.items];
+  document.getElementById('budget-modal-title').textContent='Editar presupuesto';
+  document.getElementById('del-budget-btn').style.display='inline-flex';
+  fillPatientSelects();
+  setTimeout(()=>{document.getElementById('b-patient').value=b.patientId;document.getElementById('b-clinic').value=b.clinic||'propia'},0);
+  document.getElementById('b-date').value=b.date;
+  document.getElementById('b-status').value=b.status;
+  document.getElementById('b-payment').value=b.payment||'';
+  document.getElementById('b-notes').value=b.notes||'';
+  renderBudgetItems();
+  document.getElementById('modal-budget').classList.add('open');
+}
+function saveBudget(){
+  const budgets=load('budgets');
+  const b={id:editBudgetId||uid(),patientId:document.getElementById('b-patient').value,
+    date:document.getElementById('b-date').value,clinic:document.getElementById('b-clinic').value,
+    items:tempBudgetItems,status:document.getElementById('b-status').value,
+    payment:document.getElementById('b-payment').value,notes:document.getElementById('b-notes').value};
+  if(editBudgetId){const i=budgets.findIndex(x=>x.id===editBudgetId);budgets[i]=b}else budgets.push(b);
+  save('budgets',budgets);closeModal('modal-budget');renderBudgets();
+}
+function deleteBudget(){
+  if(!confirm('¿Eliminar este presupuesto?'))return;
+  save('budgets',load('budgets').filter(b=>b.id!==editBudgetId));
+  closeModal('modal-budget');renderBudgets();
+}
+
+/* ======== MENSAJES ======== */
+function fillMsgPatientSelect(){
+  const opts='<option value="">Seleccionar paciente...</option>'+load('patients').map(p=>`<option value="${p.id}" data-phone="${p.phone||''}" data-name="${p.name}">${p.name}</option>`).join('');
+  document.getElementById('msg-patient-select').innerHTML=opts;
+}
+function filterMsgs(f,btn){
+  currentMsgFilter=f;
+  if(btn){document.querySelectorAll('#sec-mensajes .sub-tab').forEach(t=>t.classList.remove('active'));btn.classList.add('active')}
+  renderMsgs();
+}
+function renderMsgs(){
+  let msgs=load('msgs');
+  if(currentMsgFilter!=='todos')msgs=msgs.filter(m=>m.cat===currentMsgFilter);
+  const catColors={Recordatorio:'tag-blue',Confirmación:'tag-gold','Post procedimiento':'tag-green',Promoción:'tag-purple',Otro:'tag-blue'};
+  if(!msgs.length){document.getElementById('msg-list').innerHTML='<div class="empty"><i class="ti ti-message-off"></i>Sin mensajes en esta categoría</div>';return}
+  document.getElementById('msg-list').innerHTML=msgs.map(m=>`
+    <div class="msg-card">
+      <div class="row">
+        <div style="display:flex;align-items:center;gap:8px">
+          <span class="tag ${catColors[m.cat]||'tag-blue'}">${m.cat}</span>
+          <span style="font-weight:600;font-size:13px">${m.name}</span>
+        </div>
+        <div style="display:flex;gap:6px">
+          <button class="btn btn-sm btn-outline" onclick="openEditMsg('${m.id}');event.stopPropagation()"><i class="ti ti-edit"></i></button>
+          <button class="wa-btn btn-sm" onclick="sendWhatsApp('${m.id}');event.stopPropagation()"><i class="ti ti-brand-whatsapp"></i> Enviar</button>
+        </div>
+      </div>
+      <div class="msg-preview">${m.body}</div>
+    </div>`).join('');
+}
+function sendWhatsApp(msgId){
+  const sel=document.getElementById('msg-patient-select');
+  const opt=sel.options[sel.selectedIndex];
+  const phone=(opt&&opt.dataset.phone)||'';
+  const name=(opt&&opt.dataset.name)||'';
+  if(!phone){alert('Primero selecciona un paciente con número de WhatsApp registrado');return}
+  const msg=load('msgs').find(m=>m.id===msgId);if(!msg)return;
+  const body=msg.body.replace(/{nombre}/g,name.split(' ')[0]);
+  const cleaned=phone.replace(/[\s\-\(\)]/g,'');
+  const url=`https://wa.me/${cleaned.startsWith('+')? cleaned.slice(1):cleaned}?text=${encodeURIComponent(body)}`;
+  window.open(url,'_blank');
+}
+function openNewMsg(){
+  editMsgId=null;
+  document.getElementById('msg-modal-title').textContent='Nuevo mensaje';
+  document.getElementById('del-msg-btn').style.display='none';
+  document.getElementById('m-name').value='';
+  document.getElementById('m-body').value='';
+  document.getElementById('m-cat').value='Recordatorio';
+  document.getElementById('modal-msg').classList.add('open');
+}
+function openEditMsg(id){
+  const m=load('msgs').find(x=>x.id===id);if(!m)return;
+  editMsgId=id;
+  document.getElementById('msg-modal-title').textContent='Editar mensaje';
+  document.getElementById('del-msg-btn').style.display='inline-flex';
+  document.getElementById('m-name').value=m.name;
+  document.getElementById('m-cat').value=m.cat;
+  document.getElementById('m-body').value=m.body;
+  document.getElementById('modal-msg').classList.add('open');
+}
+function saveMsg(){
+  if(!document.getElementById('m-name').value.trim()){alert('Ponle un nombre al mensaje');return}
+  const msgs=load('msgs');
+  const m={id:editMsgId||uid(),name:document.getElementById('m-name').value,
+    cat:document.getElementById('m-cat').value,body:document.getElementById('m-body').value};
+  if(editMsgId){const i=msgs.findIndex(x=>x.id===editMsgId);msgs[i]=m}else msgs.push(m);
+  save('msgs',msgs);closeModal('modal-msg');renderMsgs();
+}
+function deleteMsg(){
+  if(!confirm('¿Eliminar este mensaje?'))return;
+  save('msgs',load('msgs').filter(m=>m.id!==editMsgId));
+  closeModal('modal-msg');renderMsgs();
+}
+
+/* ---- Cerrar modales ---- */
+document.querySelectorAll('.modal-bg').forEach(m=>m.addEventListener('click',function(e){if(e.target===this)closeModal(this.id)}));
+
+/* ---- Init ---- */
+initDefaultMsgs();
+renderCal();
+</script>
+</body>
+</html>
