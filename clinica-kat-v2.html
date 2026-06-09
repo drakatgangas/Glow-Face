@@ -164,11 +164,11 @@ textarea{resize:vertical;min-height:70px}
 </header>
 
 <nav>
-  <button class="nav-btn active" onclick="showSection('agenda',this)"><i class="ti ti-calendar"></i> Agenda</button>
-  <button class="nav-btn" onclick="showSection('pacientes',this)"><i class="ti ti-users"></i> Pacientes</button>
-  <button class="nav-btn" onclick="showSection('insumos',this)"><i class="ti ti-package"></i> Insumos</button>
-  <button class="nav-btn" onclick="showSection('presupuestos',this)"><i class="ti ti-receipt"></i> Presupuestos</button>
-  <button class="nav-btn" onclick="showSection('mensajes',this)"><i class="ti ti-message-circle"></i> Mensajes</button>
+  <button class="nav-btn active" id="nav-agenda" onclick="showSection('agenda')"><i class="ti ti-calendar"></i> Agenda</button>
+  <button class="nav-btn" id="nav-pacientes" onclick="showSection('pacientes')"><i class="ti ti-users"></i> Pacientes</button>
+  <button class="nav-btn" id="nav-insumos" onclick="showSection('insumos')"><i class="ti ti-package"></i> Insumos</button>
+  <button class="nav-btn" id="nav-presupuestos" onclick="showSection('presupuestos')"><i class="ti ti-receipt"></i> Presupuestos</button>
+  <button class="nav-btn" id="nav-mensajes" onclick="showSection('mensajes')"><i class="ti ti-message-circle"></i> Mensajes</button>
 </nav>
 
 <!-- ===== AGENDA ===== -->
@@ -521,11 +521,11 @@ function initDefaultMsgs(){
 }
 
 /* ---- Nav ---- */
-function showSection(id,btn){
+function showSection(id){
   document.querySelectorAll('.section').forEach(s=>s.classList.remove('active'));
   document.querySelectorAll('.nav-btn').forEach(b=>b.classList.remove('active'));
   document.getElementById('sec-'+id).classList.add('active');
-  if(btn)btn.classList.add('active');
+  var navBtn=document.getElementById('nav-'+id); if(navBtn)navBtn.classList.add('active');
   if(id==='agenda')renderCal();
   if(id==='pacientes')renderPatients();
   if(id==='insumos')renderInsumos();
@@ -872,7 +872,7 @@ function renderBudgets(){
       ${b.items.length?`<div style="font-size:11px;color:var(--text3);margin-top:6px">${b.items.map(it=>`${it.desc||'—'} ×${it.qty||1}`).join(' · ')}</div>`:''}
     </div>`}).join('');
 }
-let tempBudgetItems=[];
+
 function renderBudgetItems(){
   document.getElementById('budget-items').innerHTML=tempBudgetItems.length?tempBudgetItems.map((it,i)=>`
     <div class="budget-item-grid">
