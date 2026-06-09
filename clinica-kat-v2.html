@@ -163,6 +163,11 @@ textarea{resize:vertical;min-height:70px}
   <div style="font-size:11px;color:var(--text2)" id="hdr-date"></div>
 </header>
 
+<div id="sync-banner" style="display:none;background:#FDF8EC;border-bottom:1px solid #E8E4DC;padding:.6rem 1.5rem;align-items:center;gap:8px;font-size:12px;color:#7A7570">
+  <div style="width:14px;height:14px;border:2px solid #C9A84C;border-top-color:transparent;border-radius:50%;animation:spin .8s linear infinite;flex-shrink:0"></div>
+  Sincronizando con la nube...
+</div>
+<style>@keyframes spin{to{transform:rotate(360deg)}}</style>
 <nav>
   <button class="nav-btn active" id="nav-agenda" onclick="showSection('agenda')"><i class="ti ti-calendar"></i> Agenda</button>
   <button class="nav-btn" id="nav-pacientes" onclick="showSection('pacientes')"><i class="ti ti-users"></i> Pacientes</button>
@@ -498,8 +503,49 @@ let selDate=today.toISOString().split('T')[0];
 let editApptId=null,editPatientId=null,editInsumoId=null,editBudgetId=null,editMsgId=null;
 let tempProcedures=[],tempBudgetItems=[],currentInsumoFilter='todos',currentMsgFilter='todos';
 
-function load(k){try{return JSON.parse(localStorage.getItem('dka_'+k)||'[]')}catch{return[]}}
-function save(k,v){localStorage.setItem('dka_'+k,JSON.stringify(v))}
+const API_URL='https://script.google.com/macros/s/AKfycbxtfZQm_8h5wWyU4uO3bERdklzlbDe2A1kJBwxQbQ6xogNgIabS-Q-bBBPoCqK3dOF8Qw/exec';
+let _cache={};
+let _saveQueue={};
+let _saveTimer=null;
+
+function load(k){
+  if(_cache[k]!==undefined)return _cache[k];
+  try{const v=localStorage.getItem('dka_'+k);if(v)_cache[k]=JSON.parse(v);}catch{}
+  return _cache[k]||[];
+}
+
+function save(k,v){
+  _cache[k]=v;
+  try{localStorage.setItem('dka_'+k,JSON.stringify(v));}catch{}
+  _saveQueue[k]=v;
+  if(_saveTimer)clearTimeout(_saveTimer);
+  _saveTimer=setTimeout(flushSaves,800);
+}
+
+function flushSaves(){
+  const q=Object.assign({},_saveQueue);
+  _saveQueue={};
+  Object.keys(q).forEach(k=>{
+    fetch(API_URL+'?action=set&key='+k,{method:'POST',body:JSON.stringify(q[k])}).catch(()=>{});
+  });
+}
+
+function syncFromCloud(){
+  const keys=['patients','appts','insumos','budgets','msgs'];
+  const banner=document.getElementById('sync-banner');
+  if(banner)banner.style.display='flex';
+  Promise.all(keys.map(k=>
+    fetch(API_URL+'?action=get&key='+k).then(r=>r.json()).then(data=>{
+      if(Array.isArray(data)&&data.length>0){
+        _cache[k]=data;
+        localStorage.setItem('dka_'+k,JSON.stringify(data));
+      }
+    }).catch(()=>{})
+  )).then(()=>{
+    if(banner)banner.style.display='none';
+    renderCal();
+  });
+}
 function uid(){return Date.now().toString(36)+Math.random().toString(36).slice(2,6)}
 function fmtCLP(n){return '$'+(Math.round(n||0)).toLocaleString('es-CL')}
 function pct(n){return Math.round(n||0)+'%'}
@@ -1008,7 +1054,7 @@ document.querySelectorAll('.modal-bg').forEach(m=>m.addEventListener('click',fun
 
 /* ---- Init ---- */
 initDefaultMsgs();
-renderCal();
+syncFromCloud();
 </script>
 </body>
 </html>
