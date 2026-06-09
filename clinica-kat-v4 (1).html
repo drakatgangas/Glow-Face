@@ -1,0 +1,891 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dra. Kat Gangast · Clínica</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@3.19.0/dist/tabler-icons.min.css">
+<style>
+:root{
+  --gold:#B8973A;--gold2:#D4AF55;--gold3:#F0D080;--gold-pale:#FBF6E9;--gold-pale2:#F5EDD0;
+  --cream:#FDFBF6;--cream2:#F7F3EA;--cream3:#EDE8DB;
+  --dark:#1C1A15;--dark2:#2A2720;--dark3:#38342A;
+  --text:#1C1A15;--text2:#6B6456;--text3:#A89E8E;
+  --border:#E2D9C5;--border2:#CFC4A8;
+  --kin:#3A7BD5;--kin-light:#EAF1FB;
+  --lua:#A855A0;--lua-light:#F6EDF6;
+  --propia:#3D8F6A;--propia-light:#E8F5EF;
+  --red:#C0392B;--green:#2E7D5A;--amber:#B7770D;
+  --radius:14px;--radius-sm:9px;--radius-xs:6px;
+  --shadow:0 2px 20px rgba(28,26,21,0.07);
+  --shadow-lg:0 8px 40px rgba(28,26,21,0.12);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{min-height:100vh;background:var(--cream);color:var(--text);font-family:'DM Sans',sans-serif;font-size:14px}
+/* Scrollbar */
+::-webkit-scrollbar{width:4px;height:4px}
+::-webkit-scrollbar-track{background:transparent}
+::-webkit-scrollbar-thumb{background:var(--border2);border-radius:4px}
+
+/* Header */
+#app{max-width:1020px;margin:0 auto;padding:0 0 4rem}
+header{background:var(--dark);padding:1rem 1.75rem;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:50}
+.logo-wrap{display:flex;align-items:center;gap:12px}
+.logo-monogram{width:36px;height:36px;border:1px solid rgba(184,151,58,0.5);border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'Cormorant Garamond',serif;font-size:16px;font-weight:600;color:var(--gold2);letter-spacing:1px}
+.logo-text{font-family:'Cormorant Garamond',serif;font-size:16px;font-weight:600;color:#F5F0E8;letter-spacing:0.5px;line-height:1.2}
+.logo-sub{font-size:10px;color:rgba(255,255,255,0.4);letter-spacing:2px;text-transform:uppercase;margin-top:1px}
+#sync-status{font-size:11px;color:rgba(255,255,255,0.4);display:flex;align-items:center;gap:5px}
+.spin{animation:spin .8s linear infinite;display:inline-block}
+@keyframes spin{to{transform:rotate(360deg)}}
+
+/* Nav */
+nav{background:var(--cream);border-bottom:1px solid var(--border);display:flex;gap:1px;padding:.5rem 1.25rem;overflow-x:auto;position:sticky;top:58px;z-index:40}
+.nav-btn{background:transparent;border:none;color:var(--text2);padding:7px 14px;border-radius:var(--radius-sm);font-size:11px;font-weight:500;cursor:pointer;white-space:nowrap;transition:all .2s;display:flex;align-items:center;gap:5px;font-family:'DM Sans',sans-serif;letter-spacing:0.5px}
+.nav-btn:hover{background:var(--cream2);color:var(--text)}
+.nav-btn.active{background:var(--dark);color:var(--gold2);font-weight:600}
+.nav-btn.active .ti{color:var(--gold2)}
+
+/* Sections */
+.section{display:none;padding:1.5rem 1.75rem}
+.section.active{display:block}
+
+/* Typography */
+.section-title{font-family:'Cormorant Garamond',serif;font-size:26px;font-weight:500;color:var(--dark);letter-spacing:-0.5px;margin-bottom:1.25rem;display:flex;align-items:center;justify-content:space-between}
+h3{font-size:10px;font-weight:600;color:var(--text3);text-transform:uppercase;letter-spacing:2px;margin-bottom:.75rem}
+
+/* Cards */
+.card{background:#fff;border:1px solid var(--border);border-radius:var(--radius);padding:1.5rem;margin-bottom:1rem;box-shadow:var(--shadow)}
+.card-dark{background:var(--dark2);border:1px solid rgba(255,255,255,0.06);border-radius:var(--radius);padding:1.5rem;margin-bottom:1rem}
+
+/* Grid */
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+.grid3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:.85rem}
+.grid4{display:grid;grid-template-columns:repeat(4,1fr);gap:.75rem}
+
+/* Forms */
+.field{margin-bottom:.75rem}
+label{font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:1.2px;color:var(--text3);display:block;margin-bottom:5px}
+input,select,textarea{width:100%;background:var(--cream);border:1px solid var(--border);color:var(--text);padding:9px 13px;border-radius:var(--radius-sm);font-size:13px;font-family:'DM Sans',sans-serif;outline:none;transition:all .2s;margin:0}
+input:focus,select:focus,textarea:focus{border-color:var(--gold);background:#fff;box-shadow:0 0 0 3px rgba(184,151,58,0.08)}
+select option{background:#fff}
+textarea{resize:vertical;min-height:70px}
+
+/* Buttons */
+.btn{background:var(--dark);border:none;color:var(--gold2);padding:9px 20px;border-radius:var(--radius-sm);font-size:11px;font-weight:600;cursor:pointer;font-family:'DM Sans',sans-serif;transition:all .2s;display:inline-flex;align-items:center;gap:6px;letter-spacing:0.8px;text-transform:uppercase}
+.btn:hover{background:var(--dark2);transform:translateY(-1px);box-shadow:var(--shadow)}
+.btn-gold{background:var(--gold);color:#fff}
+.btn-gold:hover{background:var(--gold2)}
+.btn-outline{background:transparent;border:1px solid var(--border2);color:var(--text2);padding:8px 18px}
+.btn-outline:hover{border-color:var(--gold);color:var(--gold);background:var(--gold-pale);transform:none;box-shadow:none}
+.btn-sm{padding:6px 13px;font-size:10px}
+.btn-danger{background:#fff;border:1px solid #FADBD8;color:var(--red)}
+.btn-danger:hover{background:#FDEDEC;transform:none;box-shadow:none}
+.btn-ghost{background:transparent;border:none;color:var(--text2);padding:5px 8px;cursor:pointer;font-family:inherit;font-size:12px;display:inline-flex;align-items:center;gap:4px;transition:color .15s}
+.btn-ghost:hover{color:var(--text)}
+.wa-btn{background:#25D366;color:#fff;border:none;padding:7px 14px;border-radius:var(--radius-sm);font-size:11px;font-weight:600;cursor:pointer;display:inline-flex;align-items:center;gap:5px;font-family:inherit;letter-spacing:0.5px;text-transform:uppercase}
+.wa-btn:hover{background:#1EBE5A}
+
+/* Tags */
+.tag{display:inline-flex;align-items:center;gap:3px;font-size:10px;font-weight:600;padding:3px 9px;border-radius:20px;letter-spacing:0.3px}
+.tag-gold{background:var(--gold-pale2);color:var(--gold)}
+.tag-green{background:#E8F5EE;color:var(--green)}
+.tag-red{background:#FDEDEC;color:var(--red)}
+.tag-blue{background:#EAF1FB;color:var(--kin)}
+.tag-purple{background:#F6EDF6;color:var(--lua)}
+.tag-kin{background:var(--kin-light);color:var(--kin)}
+.tag-lua{background:var(--lua-light);color:var(--lua)}
+.tag-propia{background:var(--propia-light);color:var(--propia)}
+
+/* Clinic dots */
+.clinic-dot{width:7px;height:7px;border-radius:50%;display:inline-block;flex-shrink:0}
+.dot-kin{background:var(--kin)}.dot-lua{background:var(--lua)}.dot-propia{background:var(--propia)}
+
+/* Utils */
+.row{display:flex;align-items:center;justify-content:space-between;gap:.65rem}
+.divider{border:none;border-top:1px solid var(--border);margin:1rem 0}
+.empty{text-align:center;padding:2.5rem;color:var(--text3);font-size:13px}
+.empty .ti{font-size:28px;display:block;margin-bottom:.5rem;color:var(--border2)}
+
+/* Stat cards */
+.stat-card{background:#fff;border:1px solid var(--border);border-radius:var(--radius);padding:1rem 1.25rem;box-shadow:var(--shadow)}
+.stat-card-dark{background:var(--dark2);border:1px solid rgba(255,255,255,0.07);border-radius:var(--radius);padding:1rem 1.25rem}
+.stat-num{font-family:'Cormorant Garamond',serif;font-size:28px;font-weight:500;color:var(--dark);margin-bottom:2px;line-height:1}
+.stat-num-gold{color:var(--gold)}
+.stat-lbl{font-size:10px;color:var(--text3);font-weight:500;text-transform:uppercase;letter-spacing:1.2px}
+
+/* Calendar */
+.cal-wrap{background:#fff;border:1px solid var(--border);border-radius:var(--radius);padding:1.25rem;box-shadow:var(--shadow);margin-bottom:1.25rem}
+.cal-nav{display:flex;align-items:center;gap:1rem;margin-bottom:1rem}
+.cal-month-title{font-family:'Cormorant Garamond',serif;font-size:20px;font-weight:500;color:var(--dark);flex:1;text-align:center;letter-spacing:0.3px}
+.cal-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:3px}
+.cal-day-hdr{text-align:center;font-size:9px;font-weight:600;text-transform:uppercase;letter-spacing:1.5px;color:var(--text3);padding:6px 0}
+.cal-day{min-height:72px;background:var(--cream);border:1px solid var(--border);border-radius:var(--radius-xs);padding:5px;cursor:pointer;transition:all .15s;overflow:hidden}
+.cal-day:hover{border-color:var(--gold);background:var(--gold-pale)}
+.cal-day.today{border-color:var(--gold);border-width:1.5px;background:var(--gold-pale)}
+.cal-day.selected{background:var(--dark);border-color:var(--dark)}
+.cal-day.selected .cal-day-num{color:var(--gold2)}
+.cal-day.other-month{opacity:.3;background:var(--cream2)}
+.cal-day-num{font-size:11px;font-weight:600;color:var(--text2);margin-bottom:2px}
+.cal-day.today .cal-day-num{color:var(--gold)}
+.cal-event{font-size:9px;font-weight:600;border-radius:3px;padding:1px 4px;margin-bottom:1px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;line-height:1.5}
+.cal-event-kin{background:var(--kin-light);color:var(--kin)}
+.cal-event-lua{background:var(--lua-light);color:var(--lua)}
+.cal-event-propia{background:var(--propia-light);color:var(--propia)}
+
+/* Day view */
+.day-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:1rem}
+.day-title{font-family:'Cormorant Garamond',serif;font-size:20px;font-weight:500;color:var(--dark);letter-spacing:0.2px}
+.day-summary{display:grid;grid-template-columns:repeat(3,1fr);gap:.65rem;margin-bottom:1rem}
+.day-sum-card{background:#fff;border:1px solid var(--border);border-radius:var(--radius-sm);padding:.75rem 1rem;text-align:center;box-shadow:var(--shadow)}
+.day-sum-num{font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:500;color:var(--dark)}
+.day-sum-lbl{font-size:9px;color:var(--text3);text-transform:uppercase;letter-spacing:1.5px;margin-top:1px}
+
+/* Appointments */
+.appt-item{background:#fff;border:1px solid var(--border);border-radius:var(--radius);padding:1rem 1.25rem;margin-bottom:.5rem;cursor:pointer;transition:all .2s;display:flex;align-items:center;gap:12px;box-shadow:var(--shadow)}
+.appt-item:hover{border-color:var(--gold);transform:translateY(-1px);box-shadow:var(--shadow-lg)}
+.appt-time-badge{background:var(--dark);color:var(--gold2);font-size:11px;font-weight:600;padding:6px 10px;border-radius:var(--radius-xs);min-width:52px;text-align:center;flex-shrink:0;letter-spacing:0.5px}
+
+/* Patients */
+.patient-item{background:#fff;border:1px solid var(--border);border-radius:var(--radius);padding:1rem 1.25rem;margin-bottom:.5rem;cursor:pointer;display:flex;align-items:center;gap:12px;transition:all .2s;box-shadow:var(--shadow)}
+.patient-item:hover{border-color:var(--gold);transform:translateY(-1px);box-shadow:var(--shadow-lg)}
+.avatar{width:40px;height:40px;border-radius:50%;background:var(--cream3);border:1.5px solid var(--border2);display:flex;align-items:center;justify-content:center;color:var(--gold);font-size:12px;font-weight:600;flex-shrink:0;overflow:hidden;font-family:'Cormorant Garamond',serif}
+.avatar img{width:100%;height:100%;object-fit:cover;border-radius:50%}
+
+/* Insumos */
+.insumo-row{background:#fff;border:1px solid var(--border);border-radius:var(--radius);padding:1rem 1.25rem;margin-bottom:.5rem;cursor:pointer;transition:all .2s;box-shadow:var(--shadow)}
+.insumo-row:hover{border-color:var(--gold);transform:translateY(-1px);box-shadow:var(--shadow-lg)}
+.stock-bar-bg{background:var(--cream2);border-radius:4px;height:3px;width:100%;margin-top:6px}
+.stock-bar{height:3px;border-radius:4px}
+.ganancia-pill{display:inline-flex;align-items:center;font-size:10px;font-weight:600;padding:2px 7px;border-radius:20px;background:#E8F5EE;color:var(--green)}
+
+/* Mensajes */
+.msg-card{background:#fff;border:1px solid var(--border);border-radius:var(--radius);padding:1.25rem;margin-bottom:.65rem;box-shadow:var(--shadow)}
+.msg-preview{font-size:12px;color:var(--text2);margin-top:.5rem;line-height:1.7;white-space:pre-wrap;background:var(--cream);border-radius:var(--radius-sm);padding:.75rem;max-height:80px;overflow:hidden;border-left:2px solid var(--border2)}
+
+/* Finanzas */
+.fin-bar{height:6px;border-radius:4px;background:var(--cream2);margin-top:5px;overflow:hidden}
+.fin-bar-fill{height:100%;border-radius:4px;transition:width .4s}
+
+/* Transbank */
+.tbk-badge{display:inline-flex;align-items:center;gap:6px;background:var(--dark);color:var(--gold2);font-size:10px;font-weight:600;padding:4px 10px;border-radius:20px;letter-spacing:0.8px;text-transform:uppercase}
+.pay-link-card{background:linear-gradient(135deg,var(--dark) 0%,var(--dark2) 100%);border:1px solid rgba(184,151,58,0.2);border-radius:var(--radius);padding:1.5rem;margin-bottom:.75rem;position:relative;overflow:hidden}
+.pay-link-card::before{content:'';position:absolute;top:-30px;right:-30px;width:100px;height:100px;border-radius:50%;background:rgba(184,151,58,0.06)}
+.pay-link-amount{font-family:'Cormorant Garamond',serif;font-size:36px;font-weight:500;color:var(--gold2);line-height:1}
+.pay-link-patient{font-size:12px;color:rgba(255,255,255,0.5);margin-top:4px;letter-spacing:0.5px}
+
+/* Alert */
+.alert-banner{background:#FFFBEB;border:1px solid #FDE68A;border-radius:var(--radius-sm);padding:.65rem 1rem;margin-bottom:1rem;font-size:12px;color:var(--amber);display:flex;align-items:center;gap:7px}
+
+/* Sub tabs */
+.sub-tabs{display:flex;gap:2px;margin-bottom:1.25rem;overflow-x:auto;background:var(--cream2);border-radius:var(--radius-sm);padding:4px}
+.sub-tab{background:transparent;border:none;color:var(--text2);padding:6px 13px;font-size:11px;font-weight:500;cursor:pointer;font-family:inherit;white-space:nowrap;border-radius:var(--radius-xs);transition:all .15s;letter-spacing:0.3px}
+.sub-tab.active{background:#fff;color:var(--dark);font-weight:600;box-shadow:0 1px 4px rgba(0,0,0,0.08)}
+
+/* Search */
+.search-wrap{position:relative;margin-bottom:1rem}
+.search-wrap input{padding-left:36px;background:#fff}
+.search-ico{position:absolute;left:11px;top:50%;transform:translateY(-50%);color:var(--text3);font-size:15px;pointer-events:none}
+
+/* Clinic legend */
+.clinic-legend{display:flex;gap:1.25rem;margin-bottom:1rem;flex-wrap:wrap}
+.clinic-legend-item{display:flex;align-items:center;gap:5px;font-size:11px;font-weight:500;color:var(--text2)}
+
+/* Modal */
+.modal-bg{display:none;position:fixed;inset:0;background:rgba(28,26,21,0.5);z-index:200;align-items:flex-start;justify-content:center;padding:1.5rem 1rem;overflow-y:auto;backdrop-filter:blur(4px)}
+.modal-bg.open{display:flex}
+.modal{background:#fff;border-radius:var(--radius);padding:1.75rem;width:100%;max-width:620px;margin:auto;box-shadow:0 25px 80px rgba(28,26,21,0.2)}
+.modal-title{font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:500;color:var(--dark);margin-bottom:1.25rem;display:flex;align-items:center;gap:9px;letter-spacing:-0.2px}
+
+/* Photo */
+.photo-upload{width:68px;height:68px;border-radius:50%;border:1.5px dashed var(--border2);display:flex;align-items:center;justify-content:center;cursor:pointer;overflow:hidden;flex-shrink:0;transition:border-color .2s;background:var(--cream)}
+.photo-upload:hover{border-color:var(--gold)}
+.photo-upload img{width:100%;height:100%;object-fit:cover}
+
+/* Proc grid */
+.proc-grid{display:grid;grid-template-columns:1fr 1fr 2fr auto;gap:5px;margin-bottom:5px;align-items:start}
+.budget-item-grid{display:grid;grid-template-columns:2fr 65px 120px auto;gap:5px;margin-bottom:5px;align-items:start}
+
+/* Gold line decoration */
+.gold-line{width:40px;height:2px;background:linear-gradient(90deg,var(--gold),var(--gold3));border-radius:2px;margin-bottom:1.25rem}
+
+.flex-end{display:flex;gap:.5rem;justify-content:flex-end;margin-top:1.25rem}
+
+@media(max-width:640px){
+  .grid2,.grid3,.grid4{grid-template-columns:1fr}
+  .day-summary{grid-template-columns:1fr 1fr 1fr}
+  .cal-event{display:none}
+  .section{padding:1rem}
+}
+</style>
+</head>
+<body>
+<div id="app">
+
+<header>
+  <div class="logo-wrap">
+    <div class="logo-monogram">K</div>
+    <div>
+      <div class="logo-text">Dra. Kat Gangast</div>
+      <div class="logo-sub">Medicina Estética · Concepción</div>
+    </div>
+  </div>
+  <div id="sync-status"></div>
+</header>
+
+<nav>
+  <button class="nav-btn active" id="nav-agenda" onclick="showSection('agenda')"><i class="ti ti-calendar"></i> Agenda</button>
+  <button class="nav-btn" id="nav-pacientes" onclick="showSection('pacientes')"><i class="ti ti-users"></i> Pacientes</button>
+  <button class="nav-btn" id="nav-insumos" onclick="showSection('insumos')"><i class="ti ti-package"></i> Insumos</button>
+  <button class="nav-btn" id="nav-presupuestos" onclick="showSection('presupuestos')"><i class="ti ti-receipt"></i> Presupuestos</button>
+  <button class="nav-btn" id="nav-pagos" onclick="showSection('pagos')"><i class="ti ti-credit-card"></i> Pagos</button>
+  <button class="nav-btn" id="nav-finanzas" onclick="showSection('finanzas')"><i class="ti ti-chart-bar"></i> Finanzas</button>
+  <button class="nav-btn" id="nav-mensajes" onclick="showSection('mensajes')"><i class="ti ti-message-circle"></i> Mensajes</button>
+</nav>
+
+<!-- AGENDA -->
+<div class="section active" id="sec-agenda">
+  <div class="section-title">
+    Agenda
+    <button class="btn" onclick="openNewAppt()"><i class="ti ti-plus"></i> Nueva cita</button>
+  </div>
+  <div class="clinic-legend">
+    <div class="clinic-legend-item"><span class="clinic-dot dot-kin"></span> Kinelawen</div>
+    <div class="clinic-legend-item"><span class="clinic-dot dot-lua"></span> Lua Bai</div>
+    <div class="clinic-legend-item"><span class="clinic-dot dot-propia"></span> Consulta propia</div>
+  </div>
+  <div class="cal-wrap">
+    <div class="cal-nav">
+      <button class="btn-ghost" onclick="changeMonth(-1)"><i class="ti ti-arrow-left"></i></button>
+      <div class="cal-month-title" id="cal-title"></div>
+      <button class="btn-ghost" onclick="changeMonth(1)"><i class="ti ti-arrow-right"></i></button>
+    </div>
+    <div class="cal-grid" id="cal-grid"></div>
+  </div>
+  <div id="day-summary-wrap"></div>
+  <div class="day-header">
+    <div class="day-title" id="day-title"></div>
+    <button class="btn-outline btn-sm" onclick="openNewAppt()"><i class="ti ti-plus"></i> Agregar</button>
+  </div>
+  <div id="day-appts"></div>
+</div>
+
+<!-- PACIENTES -->
+<div class="section" id="sec-pacientes">
+  <div class="section-title">Fichas clínicas <button class="btn" onclick="openNewPatient()"><i class="ti ti-plus"></i> Nueva ficha</button></div>
+  <div class="search-wrap"><i class="ti ti-search search-ico"></i><input type="text" id="patient-search" placeholder="Buscar por nombre o teléfono..." oninput="renderPatients()"></div>
+  <div id="patient-list"></div>
+</div>
+
+<!-- INSUMOS -->
+<div class="section" id="sec-insumos">
+  <div class="section-title">Insumos & stock <button class="btn" onclick="openNewInsumo()"><i class="ti ti-plus"></i> Agregar</button></div>
+  <div id="stock-alerts"></div>
+  <div class="grid4" id="insumo-stats" style="margin-bottom:1.25rem"></div>
+  <div class="sub-tabs">
+    <button class="sub-tab active" onclick="filterInsumos('todos',this)">Todos</button>
+    <button class="sub-tab" onclick="filterInsumos('bajo',this)">⚠ Stock bajo</button>
+    <button class="sub-tab" onclick="filterInsumos('Rellenos HA',this)">Rellenos HA</button>
+    <button class="sub-tab" onclick="filterInsumos('Biostimuladores',this)">Biostimuladores</button>
+    <button class="sub-tab" onclick="filterInsumos('Toxina botulínica',this)">Toxina</button>
+  </div>
+  <div id="insumo-list"></div>
+</div>
+
+<!-- PRESUPUESTOS -->
+<div class="section" id="sec-presupuestos">
+  <div class="section-title">Presupuestos <button class="btn" onclick="openNewBudget()"><i class="ti ti-plus"></i> Nuevo</button></div>
+  <div class="grid3" id="budget-stats" style="margin-bottom:1.25rem"></div>
+  <div id="budget-list"></div>
+</div>
+
+<!-- PAGOS TRANSBANK -->
+<div class="section" id="sec-pagos">
+  <div class="section-title">Pagos</div>
+  <div class="card-dark" style="margin-bottom:1.25rem">
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:1rem">
+      <div>
+        <div class="tbk-badge"><i class="ti ti-credit-card"></i> Transbank Webpay</div>
+        <div style="font-family:'Cormorant Garamond',serif;font-size:22px;color:#F5F0E8;margin-top:.65rem;letter-spacing:0.2px">Cobros con tarjeta</div>
+      </div>
+      <div id="tbk-status-badge"></div>
+    </div>
+    <div id="tbk-config-section">
+      <div style="font-size:12px;color:rgba(255,255,255,0.45);line-height:1.7;margin-bottom:1rem">
+        Conecta Transbank para generar links de pago que puedes enviar por WhatsApp. El paciente paga con débito o crédito desde su celular.<br><br>
+        <strong style="color:rgba(255,255,255,0.6)">Necesitas:</strong> Commerce Code y API Key de Transbank (Webpay Plus producción).
+      </div>
+      <div class="grid2">
+        <div class="field"><label style="color:rgba(255,255,255,0.35)">Commerce Code</label><input type="text" id="tbk-commerce" placeholder="597055555532" style="background:rgba(255,255,255,0.07);border-color:rgba(255,255,255,0.1);color:#F5F0E8"></div>
+        <div class="field"><label style="color:rgba(255,255,255,0.35)">API Key</label><input type="password" id="tbk-apikey" placeholder="Tu API Key de producción" style="background:rgba(255,255,255,0.07);border-color:rgba(255,255,255,0.1);color:#F5F0E8"></div>
+      </div>
+      <button class="btn-gold btn btn-sm" onclick="saveTbkConfig()"><i class="ti ti-check"></i> Guardar credenciales</button>
+    </div>
+  </div>
+  <div class="section-title" style="font-size:20px;margin-bottom:1rem">Generar link de pago</div>
+  <div class="card">
+    <div class="grid2">
+      <div class="field"><label>Paciente</label><select id="pay-patient"></select></div>
+      <div class="field"><label>Monto (CLP)</label><input type="number" id="pay-amount" placeholder="0" min="0" oninput="updatePayPreview()"></div>
+    </div>
+    <div class="grid2">
+      <div class="field"><label>Procedimiento</label>
+        <select id="pay-proc"><option>Toxina botulínica</option><option>Ácido hialurónico</option><option>Sculptra</option><option>Juvelook / PDRN</option><option>Morpheus8</option><option>CO2 láser</option><option>HydraFacial</option><option>Consulta / Evaluación</option><option>Otro</option></select>
+      </div>
+      <div class="field"><label>Clínica</label>
+        <select id="pay-clinic"><option value="propia">Consulta propia</option><option value="kinelawen">Kinelawen</option><option value="lua">Lua Bai</option></select>
+      </div>
+    </div>
+    <div id="pay-preview" style="display:none" class="pay-link-card" style="margin-top:.75rem">
+      <div class="pay-link-amount" id="pay-preview-amount">$0</div>
+      <div class="pay-link-patient" id="pay-preview-patient">—</div>
+      <div style="font-size:10px;color:rgba(255,255,255,0.3);margin-top:.5rem;letter-spacing:1px;text-transform:uppercase" id="pay-preview-proc"></div>
+    </div>
+    <div class="flex-end" style="margin-top:.75rem">
+      <button class="wa-btn" onclick="generatePayLink()"><i class="ti ti-brand-whatsapp"></i> Generar y enviar por WhatsApp</button>
+      <button class="btn" onclick="generatePayLink()"><i class="ti ti-link"></i> Copiar link</button>
+    </div>
+  </div>
+  <div class="section-title" style="font-size:20px;margin-top:1.5rem;margin-bottom:1rem">Historial de cobros</div>
+  <div class="grid3" id="pay-stats" style="margin-bottom:1rem"></div>
+  <div id="pay-history"></div>
+</div>
+
+<!-- FINANZAS -->
+<div class="section" id="sec-finanzas">
+  <div class="section-title">
+    Finanzas
+    <select id="fin-period" onchange="renderFinanzas()" style="width:auto;font-size:11px;padding:7px 12px;font-family:inherit">
+      <option value="mes">Este mes</option><option value="mes_ant">Mes anterior</option>
+      <option value="anio">Este año</option><option value="todo">Todo</option>
+    </select>
+  </div>
+  <div class="grid4" id="fin-stats" style="margin-bottom:1.25rem"></div>
+  <div class="grid3" style="gap:1rem;margin-bottom:1.25rem">
+    <div class="card" style="margin:0"><h3>Por clínica</h3><div id="fin-clinicas"></div></div>
+    <div class="card" style="margin:0"><h3>Por procedimiento</h3><div id="fin-procs"></div></div>
+    <div class="card" style="margin:0"><h3>Forma de pago</h3><div id="fin-pagos"></div></div>
+  </div>
+  <div class="card"><h3>Historial mensual</h3><div id="fin-history"></div></div>
+</div>
+
+<!-- MENSAJES -->
+<div class="section" id="sec-mensajes">
+  <div class="section-title">Mensajes <button class="btn" onclick="openNewMsg()"><i class="ti ti-plus"></i> Nuevo</button></div>
+  <div style="background:var(--gold-pale);border:1px solid var(--gold-pale2);border-radius:var(--radius-sm);padding:.75rem 1rem;margin-bottom:1rem;font-size:12px;color:var(--text2)">
+    <i class="ti ti-info-circle" style="color:var(--gold)"></i> Selecciona un paciente y aprieta <strong>Enviar</strong> para abrir WhatsApp con el mensaje personalizado.
+  </div>
+  <div class="grid2" style="margin-bottom:1rem">
+    <div class="field"><label>Enviar a paciente</label><select id="msg-patient-select"></select></div>
+    <div class="field"><label>Categoría</label>
+      <select onchange="filterMsgs(this.value,null)">
+        <option value="todos">Todas</option><option value="Recordatorio">Recordatorio</option>
+        <option value="Confirmación">Confirmación</option><option value="Post procedimiento">Post procedimiento</option>
+        <option value="Promoción">Promoción</option>
+      </select>
+    </div>
+  </div>
+  <div id="msg-list"></div>
+</div>
+</div>
+
+<!-- MODAL CITA -->
+<div class="modal-bg" id="modal-appt">
+<div class="modal">
+  <div class="modal-title"><i class="ti ti-calendar" style="color:var(--gold);font-size:20px"></i><span id="appt-modal-title">Nueva cita</span></div>
+  <div class="field"><label>Paciente</label><select id="appt-patient"></select></div>
+  <div class="grid2">
+    <div class="field"><label>Fecha</label><input type="date" id="appt-date"></div>
+    <div class="field"><label>Hora</label><input type="time" id="appt-time" value="09:00"></div>
+  </div>
+  <div class="field"><label>Clínica</label>
+    <select id="appt-clinic"><option value="kinelawen">🔵 Kinelawen</option><option value="lua">🟣 Lua Bai</option><option value="propia">🟢 Consulta propia</option></select>
+  </div>
+  <div class="field"><label>Procedimiento</label>
+    <select id="appt-proc"><option>Toxina botulínica</option><option>Ácido hialurónico</option><option>Sculptra</option><option>Juvelook / PDRN</option><option>Morpheus8</option><option>CO2 láser</option><option>HydraFacial</option><option>Rhinomodelación</option><option>Consulta / Evaluación</option><option>Otro</option></select>
+  </div>
+  <div class="grid2">
+    <div class="field"><label>Estado</label>
+      <select id="appt-status"><option value="confirmada">✅ Confirmada</option><option value="pendiente">⏳ Pendiente</option><option value="cancelada">❌ Cancelada</option><option value="realizada">⭐ Realizada</option></select>
+    </div>
+    <div class="field"><label>Precio cobrado (CLP)</label><input type="number" id="appt-price" value="0" min="0"></div>
+  </div>
+  <div class="field"><label>Forma de pago</label>
+    <select id="appt-payment"><option value="">—</option><option>Efectivo</option><option>Transferencia</option><option>Débito</option><option>Crédito</option><option>Webpay</option><option>Cuotas</option></select>
+  </div>
+  <div class="field"><label>Notas</label><textarea id="appt-notes" placeholder="Observaciones, indicaciones..."></textarea></div>
+  <div class="flex-end">
+    <button class="btn btn-sm btn-danger" onclick="deleteAppt()" id="del-appt-btn" style="display:none"><i class="ti ti-trash"></i></button>
+    <button class="btn-outline btn btn-sm" onclick="closeModal('modal-appt')">Cancelar</button>
+    <button class="btn btn-sm" onclick="saveAppt()"><i class="ti ti-check"></i> Guardar</button>
+  </div>
+</div>
+</div>
+
+<!-- MODAL PACIENTE -->
+<div class="modal-bg" id="modal-patient">
+<div class="modal">
+  <div class="modal-title"><i class="ti ti-user" style="color:var(--gold);font-size:20px"></i><span id="patient-modal-title">Nueva ficha</span></div>
+  <div style="display:flex;align-items:center;gap:1rem;margin-bottom:1rem">
+    <div class="photo-upload" onclick="document.getElementById('photo-input').click()">
+      <img id="photo-preview" src="" style="display:none;width:100%;height:100%;object-fit:cover">
+      <i class="ti ti-camera" id="photo-icon" style="font-size:20px;color:var(--text3)"></i>
+    </div>
+    <div style="flex:1">
+      <div class="field" style="margin-bottom:.5rem"><label>Nombre completo</label><input type="text" id="p-name" placeholder="Nombre Apellido"></div>
+      <div class="field" style="margin:0"><label>Teléfono / WhatsApp</label><input type="text" id="p-phone" placeholder="+56 9 XXXX XXXX"></div>
+    </div>
+    <input type="file" id="photo-input" accept="image/*" style="display:none" onchange="handlePhoto(this)">
+  </div>
+  <div class="grid2">
+    <div class="field"><label>RUT</label><input type="text" id="p-rut" placeholder="12.345.678-9"></div>
+    <div class="field"><label>Fecha de nacimiento</label><input type="date" id="p-dob"></div>
+  </div>
+  <div class="grid2">
+    <div class="field"><label>Email</label><input type="email" id="p-email" placeholder="correo@email.com"></div>
+    <div class="field"><label>Instagram</label><input type="text" id="p-ig" placeholder="@usuario"></div>
+  </div>
+  <div class="divider"></div>
+  <h3>Anamnesis</h3>
+  <div class="grid2">
+    <div class="field"><label>Fototipo Fitzpatrick</label>
+      <select id="p-fitz"><option value="">—</option><option>I</option><option>II</option><option>III</option><option>IV</option><option>V</option><option>VI</option></select>
+    </div>
+    <div class="field"><label>Alergias conocidas</label><input type="text" id="p-alergias" placeholder="Ej: lidocaína, látex..."></div>
+  </div>
+  <div class="field"><label>Antecedentes médicos</label><textarea id="p-antecedentes" placeholder="HTA, DM2, anticoagulantes, embarazo, queloides..."></textarea></div>
+  <div class="field"><label>Medicamentos actuales</label><textarea id="p-medicamentos" placeholder="Vitamina E, omega 3, AAS..."></textarea></div>
+  <div class="field"><label>Tratamientos estéticos previos</label><textarea id="p-previos" placeholder="Filler previo, toxina, cirugías..."></textarea></div>
+  <div class="divider"></div>
+  <h3>Historial de procedimientos</h3>
+  <div id="p-procedures-list"></div>
+  <button class="btn-outline btn btn-sm" onclick="addProcedureRow()" style="margin-bottom:.75rem"><i class="ti ti-plus"></i> Agregar procedimiento</button>
+  <div class="divider"></div>
+  <div class="field"><label>Fotos antes / después</label>
+    <div id="patient-photos" style="display:flex;gap:.5rem;flex-wrap:wrap;margin-bottom:.5rem"></div>
+    <button class="btn-outline btn btn-sm" onclick="document.getElementById('before-after-input').click()"><i class="ti ti-photo"></i> Agregar foto</button>
+    <input type="file" id="before-after-input" accept="image/*" style="display:none" onchange="handleBeforeAfter(this)">
+  </div>
+  <div class="field"><label>Notas clínicas / plan</label><textarea id="p-notas" placeholder="Plan de sesiones, consentimientos, observaciones..."></textarea></div>
+  <div class="flex-end">
+    <button class="btn btn-sm btn-danger" onclick="deletePatient()" id="del-patient-btn" style="display:none"><i class="ti ti-trash"></i></button>
+    <button class="btn-outline btn btn-sm" onclick="closeModal('modal-patient')">Cancelar</button>
+    <button class="btn btn-sm" onclick="savePatient()"><i class="ti ti-check"></i> Guardar ficha</button>
+  </div>
+</div>
+</div>
+
+<!-- MODAL INSUMO -->
+<div class="modal-bg" id="modal-insumo">
+<div class="modal">
+  <div class="modal-title"><i class="ti ti-package" style="color:var(--gold);font-size:20px"></i><span id="insumo-modal-title">Nuevo insumo</span></div>
+  <div class="field"><label>Nombre del producto</label><input type="text" id="i-name" placeholder="Ej: Juvederm Voluma 1ml"></div>
+  <div class="grid2">
+    <div class="field"><label>Categoría</label>
+      <select id="i-cat"><option>Rellenos HA</option><option>Biostimuladores</option><option>Toxina botulínica</option><option>PDRN / Polynucleotides</option><option>Material estéril</option><option>Anestesia</option><option>Skincare / Cosmética</option><option>Otro</option></select>
+    </div>
+    <div class="field"><label>Unidad</label>
+      <select id="i-unit"><option>unidad</option><option>ml</option><option>vial</option><option>caja</option><option>jeringa</option><option>ampolla</option></select>
+    </div>
+  </div>
+  <div class="grid2">
+    <div class="field"><label>Stock actual</label><input type="number" id="i-stock" value="0" min="0"></div>
+    <div class="field"><label>Stock mínimo (alerta)</label><input type="number" id="i-min" value="2" min="0"></div>
+  </div>
+  <div class="divider"></div>
+  <h3>Precios y ganancias por clínica</h3>
+  <div class="field"><label>Costo del insumo (CLP)</label><input type="number" id="i-cost" value="0" min="0" oninput="calcGanancias()"></div>
+  <div style="background:var(--propia-light);border:1px solid #C3E6D5;border-radius:var(--radius-sm);padding:.85rem;margin-bottom:.65rem">
+    <div style="font-size:10px;font-weight:700;color:var(--propia);margin-bottom:.4rem;letter-spacing:1px;text-transform:uppercase">🟢 Consulta propia</div>
+    <div class="field" style="margin-bottom:.3rem"><label>Precio venta (CLP)</label><input type="number" id="i-price-propia" value="0" min="0" oninput="calcGanancias()"></div>
+    <div id="gan-propia" style="font-size:11px;color:var(--propia);font-weight:600"></div>
+  </div>
+  <div style="background:var(--kin-light);border:1px solid #B3D4F5;border-radius:var(--radius-sm);padding:.85rem;margin-bottom:.65rem">
+    <div style="font-size:10px;font-weight:700;color:var(--kin);margin-bottom:.4rem;letter-spacing:1px;text-transform:uppercase">🔵 Kinelawen <span style="font-weight:400;opacity:.7">(50% clínica)</span></div>
+    <div class="field" style="margin-bottom:.3rem"><label>Precio venta (CLP)</label><input type="number" id="i-price-kin" value="0" min="0" oninput="calcGanancias()"></div>
+    <div id="gan-kin" style="font-size:11px;color:var(--kin);font-weight:600"></div>
+  </div>
+  <div style="background:var(--lua-light);border:1px solid #DDB8DA;border-radius:var(--radius-sm);padding:.85rem;margin-bottom:.65rem">
+    <div style="font-size:10px;font-weight:700;color:var(--lua);margin-bottom:.4rem;letter-spacing:1px;text-transform:uppercase">🟣 Lua Bai <span style="font-weight:400;opacity:.7">(tarifa fija)</span></div>
+    <div class="field" style="margin-bottom:.3rem"><label>Tarifa que recibes (CLP)</label><input type="number" id="i-price-lua" value="0" min="0" oninput="calcGanancias()"></div>
+    <div id="gan-lua" style="font-size:11px;color:var(--lua);font-weight:600"></div>
+  </div>
+  <div class="grid2">
+    <div class="field"><label>Proveedor</label><input type="text" id="i-supplier" placeholder="Ej: Allergan Chile"></div>
+    <div class="field"><label>Notas (lote, vencimiento)</label><input type="text" id="i-notes" placeholder="Vence: 12/2026"></div>
+  </div>
+  <div class="flex-end">
+    <button class="btn btn-sm btn-danger" onclick="deleteInsumo()" id="del-insumo-btn" style="display:none"><i class="ti ti-trash"></i></button>
+    <button class="btn-outline btn btn-sm" onclick="closeModal('modal-insumo')">Cancelar</button>
+    <button class="btn btn-sm" onclick="saveInsumo()"><i class="ti ti-check"></i> Guardar</button>
+  </div>
+</div>
+</div>
+
+<!-- MODAL PRESUPUESTO -->
+<div class="modal-bg" id="modal-budget">
+<div class="modal">
+  <div class="modal-title"><i class="ti ti-receipt" style="color:var(--gold);font-size:20px"></i><span id="budget-modal-title">Nuevo presupuesto</span></div>
+  <div class="grid2">
+    <div class="field"><label>Paciente</label><select id="b-patient"></select></div>
+    <div class="field"><label>Fecha</label><input type="date" id="b-date"></div>
+  </div>
+  <div class="field"><label>Clínica</label>
+    <select id="b-clinic"><option value="propia">🟢 Consulta propia</option><option value="kinelawen">🔵 Kinelawen</option><option value="lua">🟣 Lua Bai</option></select>
+  </div>
+  <div class="divider"></div>
+  <h3>Ítems</h3>
+  <div id="budget-items"></div>
+  <button class="btn-outline btn btn-sm" onclick="addBudgetItem()" style="margin-bottom:.75rem"><i class="ti ti-plus"></i> Agregar ítem</button>
+  <div class="divider"></div>
+  <div class="row"><span style="font-size:13px;font-weight:600;color:var(--text2)">Total</span><span style="font-family:'Cormorant Garamond',serif;font-size:26px;font-weight:500;color:var(--gold)" id="b-total">$0</span></div>
+  <div class="grid2" style="margin-top:.65rem">
+    <div class="field"><label>Estado</label>
+      <select id="b-status"><option value="pendiente">Pendiente</option><option value="aprobado">Aprobado</option><option value="rechazado">Rechazado</option><option value="pagado">Pagado</option></select>
+    </div>
+    <div class="field"><label>Forma de pago</label>
+      <select id="b-payment"><option value="">—</option><option>Efectivo</option><option>Transferencia</option><option>Débito</option><option>Crédito</option><option>Webpay</option><option>Cuotas</option></select>
+    </div>
+  </div>
+  <div class="field"><label>Notas</label><textarea id="b-notes" placeholder="Validez, condiciones, indicaciones..."></textarea></div>
+  <div class="flex-end">
+    <button class="btn btn-sm btn-danger" onclick="deleteBudget()" id="del-budget-btn" style="display:none"><i class="ti ti-trash"></i></button>
+    <button class="btn-outline btn btn-sm" onclick="closeModal('modal-budget')">Cancelar</button>
+    <button class="btn btn-sm" onclick="saveBudget()"><i class="ti ti-check"></i> Guardar</button>
+  </div>
+</div>
+</div>
+
+<!-- MODAL MENSAJE -->
+<div class="modal-bg" id="modal-msg">
+<div class="modal">
+  <div class="modal-title"><i class="ti ti-message-circle" style="color:var(--gold);font-size:20px"></i><span id="msg-modal-title">Nuevo mensaje</span></div>
+  <div class="grid2">
+    <div class="field"><label>Nombre</label><input type="text" id="m-name" placeholder="Ej: Recordatorio 24h"></div>
+    <div class="field"><label>Categoría</label>
+      <select id="m-cat"><option>Recordatorio</option><option>Confirmación</option><option>Post procedimiento</option><option>Promoción</option><option>Otro</option></select>
+    </div>
+  </div>
+  <div class="field"><label>Texto del mensaje</label><textarea id="m-body" style="min-height:130px" placeholder="Hola {nombre}...&#10;&#10;Usa {nombre} para el nombre del paciente."></textarea></div>
+  <div style="font-size:11px;color:var(--text2);background:var(--gold-pale);border-radius:var(--radius-xs);padding:.65rem;margin-bottom:.65rem">Variable disponible: <code style="background:#fff;padding:1px 5px;border-radius:3px;font-size:11px">{nombre}</code> — se reemplaza automáticamente al enviar.</div>
+  <div class="flex-end">
+    <button class="btn btn-sm btn-danger" onclick="deleteMsg()" id="del-msg-btn" style="display:none"><i class="ti ti-trash"></i></button>
+    <button class="btn-outline btn btn-sm" onclick="closeModal('modal-msg')">Cancelar</button>
+    <button class="btn btn-sm" onclick="saveMsg()"><i class="ti ti-check"></i> Guardar</button>
+  </div>
+</div>
+</div>
+
+<script>
+const API_URL='https://script.google.com/macros/s/AKfycbxtfZQm_8h5wWyU4uO3bERdklzlbDe2A1kJBwxQbQ6xogNgIabS-Q-bBBPoCqK3dOF8Qw/exec';
+const MONTHS=['Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'];
+const DAYS=['Dom','Lun','Mar','Mié','Jue','Vie','Sáb'];
+const CLINIC_LABELS={kinelawen:'Kinelawen',lua:'Lua Bai',propia:'Consulta propia'};
+const CLINIC_TAGS={kinelawen:'tag-kin',lua:'tag-lua',propia:'tag-propia'};
+const today=new Date();
+let calYear=today.getFullYear(),calMonth=today.getMonth();
+let selDate=today.toISOString().split('T')[0];
+let editApptId=null,editPatientId=null,editInsumoId=null,editBudgetId=null,editMsgId=null;
+let tempProcedures=[],tempBudgetItems=[],tempPhotos=[],currentPatientPhoto='';
+let currentInsumoFilter='todos',currentMsgFilter='todos';
+let _cache={},_saveQueue={},_saveTimer=null;
+
+function load(k){if(_cache[k]!==undefined)return _cache[k];try{const v=localStorage.getItem('dka_'+k);if(v){_cache[k]=JSON.parse(v);return _cache[k];}}catch{}return _cache[k]||[];}
+function save(k,v){_cache[k]=v;try{localStorage.setItem('dka_'+k,JSON.stringify(v));}catch{}
+  _saveQueue[k]=v;if(_saveTimer)clearTimeout(_saveTimer);_saveTimer=setTimeout(flushSaves,1000);setSyncStatus('saving');}
+function flushSaves(){const q=Object.assign({},_saveQueue);_saveQueue={};const keys=Object.keys(q);if(!keys.length)return;
+  Promise.all(keys.map(k=>fetch(API_URL+'?action=set&key='+k,{method:'POST',body:JSON.stringify(q[k])}).catch(()=>{}))).then(()=>setSyncStatus('ok')).catch(()=>setSyncStatus('error'));}
+function syncFromCloud(){setSyncStatus('loading');const keys=['patients','appts','insumos','budgets','msgs','payments'];
+  Promise.all(keys.map(k=>fetch(API_URL+'?action=get&key='+k).then(r=>r.json()).then(data=>{if(Array.isArray(data)&&data.length>0){_cache[k]=data;localStorage.setItem('dka_'+k,JSON.stringify(data));}}).catch(()=>{})
+  )).then(()=>{setSyncStatus('ok');renderCal();checkStockAlerts();}).catch(()=>setSyncStatus('error'));}
+function setSyncStatus(s){const el=document.getElementById('sync-status');if(!el)return;
+  if(s==='loading')el.innerHTML='<span class="spin ti ti-refresh"></span> Sincronizando...';
+  else if(s==='saving')el.innerHTML='<span class="spin ti ti-refresh"></span> Guardando...';
+  else if(s==='ok')el.innerHTML='<i class="ti ti-cloud-check" style="color:var(--gold2)"></i> Sincronizado';
+  else el.innerHTML='<i class="ti ti-cloud-off" style="color:#C0392B"></i> Sin conexión';}
+function uid(){return Date.now().toString(36)+Math.random().toString(36).slice(2,6)}
+function fmtCLP(n){return '$'+(Math.round(n||0)).toLocaleString('es-CL')}
+
+function checkStockAlerts(){
+  const bajo=load('insumos').filter(i=>i.stock<=i.min&&i.min>0);
+  const el=document.getElementById('stock-alerts');if(!el)return;
+  el.innerHTML=bajo.length?`<div class="alert-banner"><i class="ti ti-alert-triangle"></i><strong>Stock bajo:</strong> ${bajo.map(i=>i.name).join(', ')}</div>`:'';
+}
+
+function initDefaultMsgs(){
+  if(load('msgs').length>0)return;
+  save('msgs',[
+    {id:uid(),name:'Recordatorio de cita',cat:'Recordatorio',body:'Hola {nombre} 🌸 Te recordamos que mañana tienes tu cita con la Dra. Kat Gangast. Por favor llega sin maquillaje en la zona a tratar. ¡Te esperamos!'},
+    {id:uid(),name:'Confirmación de cita',cat:'Confirmación',body:'Hola {nombre} ✨ Tu cita está confirmada. Si necesitas reagendar, escríbenos con al menos 24 horas de anticipación. ¡Nos vemos pronto!'},
+    {id:uid(),name:'Post procedimiento — Toxina',cat:'Post procedimiento',body:'Hola {nombre} 💛 Recuerda las indicaciones post toxina:\n\n• No recostarte 4 horas\n• Sin ejercicio intenso 24h\n• No frotar la zona\n• Efecto final en 10–14 días\n\n¡Cualquier consulta escríbeme! 🌟'},
+    {id:uid(),name:'Post procedimiento — Filler',cat:'Post procedimiento',body:'Hola {nombre} 💛 Indicaciones post relleno:\n\n• No presionar la zona\n• Sin actividad física 24h\n• Frío local si hay inflamación\n• Sin sauna 1 semana\n\n¡Estás increíble! 💕'},
+    {id:uid(),name:'Difusión Sculptra Day',cat:'Promoción',body:'Hola {nombre} ✨ Tenemos fechas especiales para Sculptra este mes. ¿Te interesa agendar tu evaluación gratuita? ¡Los cupos son limitados! 💛'},
+    {id:uid(),name:'Difusión evaluación gratuita',cat:'Promoción',body:'Hola {nombre} 🌸 Tenemos fechas para evaluaciones gratuitas. Es el momento ideal para armar tu plan personalizado. ¿Te gustaría agendar? 💕'}
+  ]);
+}
+
+function showSection(id){
+  document.querySelectorAll('.section').forEach(s=>s.classList.remove('active'));
+  document.querySelectorAll('.nav-btn').forEach(b=>b.classList.remove('active'));
+  document.getElementById('sec-'+id).classList.add('active');
+  var b=document.getElementById('nav-'+id);if(b)b.classList.add('active');
+  if(id==='agenda')renderCal();
+  if(id==='pacientes')renderPatients();
+  if(id==='insumos'){renderInsumos();checkStockAlerts();}
+  if(id==='presupuestos')renderBudgets();
+  if(id==='pagos'){fillPayPatientSelect();renderPayHistory();loadTbkConfig();}
+  if(id==='finanzas')renderFinanzas();
+  if(id==='mensajes'){fillMsgPatientSelect();renderMsgs();}
+}
+function closeModal(id){document.getElementById(id).classList.remove('open')}
+
+/* AGENDA */
+function renderCal(){
+  document.getElementById('cal-title').textContent=MONTHS[calMonth]+' '+calYear;
+  const first=new Date(calYear,calMonth,1).getDay();
+  const days=new Date(calYear,calMonth+1,0).getDate();
+  const appts=load('appts');const todayStr=today.toISOString().split('T')[0];
+  let html='';
+  DAYS.forEach(d=>{html+=`<div class="cal-day-hdr">${d}</div>`});
+  for(let i=0;i<first;i++)html+=`<div class="cal-day other-month"></div>`;
+  for(let d=1;d<=days;d++){
+    const ds=`${calYear}-${String(calMonth+1).padStart(2,'0')}-${String(d).padStart(2,'0')}`;
+    const cls=[ds===todayStr?'today':'',ds===selDate?'selected':''].filter(Boolean).join(' ');
+    const da=appts.filter(a=>a.date===ds).sort((a,b)=>a.time.localeCompare(b.time));
+    const events=da.slice(0,3).map(a=>`<div class="cal-event cal-event-${a.clinic||'propia'}">${a.time} ${(a.proc||'').split(' ')[0]}</div>`).join('');
+    const more=da.length>3?`<div style="font-size:9px;color:var(--text3)">+${da.length-3}</div>`:'';
+    html+=`<div class="cal-day ${cls}" onclick="selectDay('${ds}')"><div class="cal-day-num">${d}</div>${events}${more}</div>`;
+  }
+  document.getElementById('cal-grid').innerHTML=html;renderDayAppts();
+}
+function selectDay(d){selDate=d;renderCal()}
+function changeMonth(dir){calMonth+=dir;if(calMonth>11){calMonth=0;calYear++}else if(calMonth<0){calMonth=11;calYear--}renderCal()}
+function renderDayAppts(){
+  const patients=load('patients');
+  const appts=load('appts').filter(a=>a.date===selDate).sort((a,b)=>a.time.localeCompare(b.time));
+  const d=new Date(selDate+'T12:00');
+  document.getElementById('day-title').textContent=d.toLocaleDateString('es-CL',{weekday:'long',day:'numeric',month:'long'});
+  const total=appts.reduce((s,a)=>s+(a.price||0),0);
+  const ganEst=appts.reduce((s,a)=>{const cl=a.clinic||'propia';if(cl==='kinelawen')return s+(a.price||0)*0.5;return s+(a.price||0);},0);
+  document.getElementById('day-summary-wrap').innerHTML=`<div class="day-summary">
+    <div class="day-sum-card"><div class="day-sum-num">${appts.length}</div><div class="day-sum-lbl">citas</div></div>
+    <div class="day-sum-card"><div class="day-sum-num" style="font-size:18px">${fmtCLP(total)}</div><div class="day-sum-lbl">ingreso</div></div>
+    <div class="day-sum-card"><div class="day-sum-num" style="font-size:18px;color:var(--green)">${fmtCLP(ganEst)}</div><div class="day-sum-lbl">ganancia est.</div></div>
+  </div>`;
+  const stT={confirmada:'tag-gold',pendiente:'tag-blue',cancelada:'tag-red',realizada:'tag-green'};
+  const stL={confirmada:'Confirmada',pendiente:'Pendiente',cancelada:'Cancelada',realizada:'Realizada'};
+  document.getElementById('day-appts').innerHTML=appts.length?appts.map(a=>{
+    const p=patients.find(x=>x.id===a.patientId);const cl=a.clinic||'propia';
+    const photoHtml=p&&p.photo?`<img src="${p.photo}" style="width:36px;height:36px;border-radius:50%;object-fit:cover;flex-shrink:0">`:`<div style="width:36px;height:36px;border-radius:50%;background:var(--cream2);display:flex;align-items:center;justify-content:center;font-family:'Cormorant Garamond',serif;font-size:13px;color:var(--gold);flex-shrink:0;border:1px solid var(--border)">${p?p.name.split(' ').map(w=>w[0]).slice(0,2).join('').toUpperCase():'?'}</div>`;
+    return`<div class="appt-item" onclick="openEditAppt('${a.id}')">
+      <div class="appt-time-badge">${a.time}</div>${photoHtml}
+      <span class="clinic-dot dot-${cl}"></span>
+      <div style="flex:1;min-width:0">
+        <div style="font-weight:600;font-size:13px">${p?p.name:'—'}</div>
+        <div style="font-size:11px;color:var(--text2);margin-top:2px">${a.proc} · <span class="tag ${CLINIC_TAGS[cl]}">${CLINIC_LABELS[cl]}</span></div>
+      </div>
+      <div style="text-align:right;flex-shrink:0">
+        ${a.price?`<div style="font-family:'Cormorant Garamond',serif;font-size:17px;font-weight:500;color:var(--gold)">${fmtCLP(a.price)}</div>`:''}
+        <span class="tag ${stT[a.status]||'tag-gold'}">${stL[a.status]||a.status}</span>
+      </div>
+    </div>`}).join(''):'<div class="empty"><i class="ti ti-calendar-off"></i>Sin citas para este día</div>';
+}
+function fillPatientSelects(){
+  const opts='<option value="">Seleccionar paciente...</option>'+load('patients').map(p=>`<option value="${p.id}">${p.name}</option>`).join('');
+  ['appt-patient','b-patient'].forEach(id=>document.getElementById(id).innerHTML=opts);
+}
+function openNewAppt(){editApptId=null;document.getElementById('appt-modal-title').textContent='Nueva cita';document.getElementById('del-appt-btn').style.display='none';document.getElementById('appt-date').value=selDate;document.getElementById('appt-time').value='09:00';document.getElementById('appt-notes').value='';document.getElementById('appt-status').value='confirmada';document.getElementById('appt-clinic').value='propia';document.getElementById('appt-price').value=0;document.getElementById('appt-payment').value='';fillPatientSelects();document.getElementById('modal-appt').classList.add('open');}
+function openEditAppt(id){const a=load('appts').find(x=>x.id===id);if(!a)return;editApptId=id;document.getElementById('appt-modal-title').textContent='Editar cita';document.getElementById('del-appt-btn').style.display='inline-flex';fillPatientSelects();setTimeout(()=>{document.getElementById('appt-patient').value=a.patientId;document.getElementById('appt-clinic').value=a.clinic||'propia';},0);document.getElementById('appt-date').value=a.date;document.getElementById('appt-time').value=a.time;document.getElementById('appt-proc').value=a.proc;document.getElementById('appt-status').value=a.status;document.getElementById('appt-price').value=a.price||0;document.getElementById('appt-payment').value=a.payment||'';document.getElementById('appt-notes').value=a.notes||'';document.getElementById('modal-appt').classList.add('open');}
+function saveAppt(){if(!document.getElementById('appt-patient').value){alert('Selecciona un paciente');return}const appts=load('appts');const a={id:editApptId||uid(),patientId:document.getElementById('appt-patient').value,date:document.getElementById('appt-date').value,time:document.getElementById('appt-time').value,proc:document.getElementById('appt-proc').value,status:document.getElementById('appt-status').value,clinic:document.getElementById('appt-clinic').value,price:parseInt(document.getElementById('appt-price').value)||0,payment:document.getElementById('appt-payment').value,notes:document.getElementById('appt-notes').value};if(editApptId){const i=appts.findIndex(x=>x.id===editApptId);appts[i]=a}else appts.push(a);save('appts',appts);closeModal('modal-appt');selDate=a.date;renderCal();}
+function deleteAppt(){if(!confirm('¿Eliminar esta cita?'))return;save('appts',load('appts').filter(a=>a.id!==editApptId));closeModal('modal-appt');renderCal();}
+
+/* PACIENTES */
+function handlePhoto(input){const file=input.files[0];if(!file)return;const r=new FileReader();r.onload=e=>{currentPatientPhoto=e.target.result;const img=document.getElementById('photo-preview');img.src=e.target.result;img.style.display='block';document.getElementById('photo-icon').style.display='none';};r.readAsDataURL(file);}
+function handleBeforeAfter(input){const file=input.files[0];if(!file)return;const r=new FileReader();r.onload=e=>{tempPhotos.push(e.target.result);renderPhotoThumbs();};r.readAsDataURL(file);}
+function renderPhotoThumbs(){document.getElementById('patient-photos').innerHTML=tempPhotos.map((p,i)=>`<div style="position:relative"><img src="${p}" style="width:60px;height:60px;object-fit:cover;border-radius:8px;border:1px solid var(--border)"><button onclick="tempPhotos.splice(${i},1);renderPhotoThumbs()" style="position:absolute;top:-4px;right:-4px;background:var(--red);color:#fff;border:none;border-radius:50%;width:16px;height:16px;font-size:10px;cursor:pointer">×</button></div>`).join('');}
+function renderPatients(){
+  const q=(document.getElementById('patient-search').value||'').toLowerCase();
+  const list=load('patients').filter(p=>!q||p.name.toLowerCase().includes(q)||(p.phone||'').includes(q));
+  if(!list.length){document.getElementById('patient-list').innerHTML='<div class="empty"><i class="ti ti-users"></i>Sin pacientes registrados</div>';return}
+  document.getElementById('patient-list').innerHTML=list.map(p=>{
+    const initials=p.name.split(' ').map(w=>w[0]).slice(0,2).join('').toUpperCase();
+    const age=p.dob?Math.floor((new Date()-new Date(p.dob))/31557600000)+'a':'';
+    const procs=load('appts').filter(a=>a.patientId===p.id).length;
+    return`<div class="patient-item" onclick="openEditPatient('${p.id}')">
+      <div class="avatar">${p.photo?`<img src="${p.photo}">`:`<span>${initials}</span>`}</div>
+      <div style="flex:1;min-width:0"><div style="font-weight:600;font-size:13px">${p.name}</div><div style="font-size:11px;color:var(--text2);margin-top:1px">${[age,p.phone].filter(Boolean).join(' · ')}</div></div>
+      <div style="text-align:right;flex-shrink:0;display:flex;flex-direction:column;align-items:flex-end;gap:3px">
+        <span style="font-size:11px;color:var(--text3)">${procs} citas</span>
+        ${p.alergias?`<span class="tag tag-red"><i class="ti ti-alert-triangle"></i> alergias</span>`:''}
+      </div>
+      <i class="ti ti-chevron-right" style="color:var(--text3);flex-shrink:0"></i>
+    </div>`}).join('');
+}
+function openNewPatient(){editPatientId=null;tempProcedures=[];tempPhotos=[];currentPatientPhoto='';document.getElementById('patient-modal-title').textContent='Nueva ficha clínica';document.getElementById('del-patient-btn').style.display='none';['p-name','p-rut','p-phone','p-email','p-ig','p-alergias','p-antecedentes','p-previos','p-medicamentos','p-notas'].forEach(id=>document.getElementById(id).value='');document.getElementById('p-dob').value='';document.getElementById('p-fitz').value='';document.getElementById('photo-preview').style.display='none';document.getElementById('photo-icon').style.display='block';renderProcedureRows();renderPhotoThumbs();document.getElementById('modal-patient').classList.add('open');}
+function openEditPatient(id){const p=load('patients').find(x=>x.id===id);if(!p)return;editPatientId=id;tempProcedures=[...(p.procedures||[])];tempPhotos=[...(p.photos||[])];currentPatientPhoto=p.photo||'';document.getElementById('patient-modal-title').textContent='Ficha — '+p.name;document.getElementById('del-patient-btn').style.display='inline-flex';['name','rut','phone','email','ig','alergias','antecedentes','previos','medicamentos','notas'].forEach(k=>{const el=document.getElementById('p-'+k);if(el)el.value=p[k]||'';});document.getElementById('p-dob').value=p.dob||'';document.getElementById('p-fitz').value=p.fitz||'';if(p.photo){document.getElementById('photo-preview').src=p.photo;document.getElementById('photo-preview').style.display='block';document.getElementById('photo-icon').style.display='none';}else{document.getElementById('photo-preview').style.display='none';document.getElementById('photo-icon').style.display='block';}renderProcedureRows();renderPhotoThumbs();document.getElementById('modal-patient').classList.add('open');}
+function renderProcedureRows(){const PROCS=['Toxina botulínica','Ácido hialurónico','Sculptra','Juvelook / PDRN','Morpheus8','CO2 láser','HydraFacial','Rhinomodelación','Otro'];document.getElementById('p-procedures-list').innerHTML=tempProcedures.map((pr,i)=>`<div class="proc-grid" style="margin-bottom:5px"><input type="date" value="${pr.date||''}" onchange="tempProcedures[${i}].date=this.value" style="margin:0"><select onchange="tempProcedures[${i}].proc=this.value" style="margin:0">${PROCS.map(o=>`<option${pr.proc===o?' selected':''}>${o}</option>`).join('')}</select><input type="text" value="${pr.notes||''}" placeholder="Producto, zona, unidades" onchange="tempProcedures[${i}].notes=this.value" style="margin:0"><button class="btn btn-sm btn-danger" onclick="tempProcedures.splice(${i},1);renderProcedureRows()" style="padding:4px 7px;margin:0"><i class="ti ti-trash"></i></button></div>`).join('');}
+function addProcedureRow(){tempProcedures.push({date:today.toISOString().split('T')[0],proc:'Toxina botulínica',notes:''});renderProcedureRows();}
+function savePatient(){if(!document.getElementById('p-name').value.trim()){alert('Ingresa el nombre');return}const patients=load('patients');const p={id:editPatientId||uid(),name:document.getElementById('p-name').value,rut:document.getElementById('p-rut').value,phone:document.getElementById('p-phone').value,email:document.getElementById('p-email').value,ig:document.getElementById('p-ig').value,dob:document.getElementById('p-dob').value,fitz:document.getElementById('p-fitz').value,alergias:document.getElementById('p-alergias').value,antecedentes:document.getElementById('p-antecedentes').value,previos:document.getElementById('p-previos').value,medicamentos:document.getElementById('p-medicamentos').value,notas:document.getElementById('p-notas').value,procedures:tempProcedures,photo:currentPatientPhoto,photos:tempPhotos};if(editPatientId){const i=patients.findIndex(x=>x.id===editPatientId);patients[i]=p}else patients.push(p);save('patients',patients);closeModal('modal-patient');renderPatients();}
+function deletePatient(){if(!confirm('¿Eliminar esta ficha?'))return;save('patients',load('patients').filter(p=>p.id!==editPatientId));closeModal('modal-patient');renderPatients();}
+
+/* INSUMOS */
+function calcGanancias(){const c=parseInt(document.getElementById('i-cost').value)||0,p=parseInt(document.getElementById('i-price-propia').value)||0,k=parseInt(document.getElementById('i-price-kin').value)||0,l=parseInt(document.getElementById('i-price-lua').value)||0;const gP=p-c,gK=k-c-(k*0.5),pP=p>0?Math.round((gP/p)*100):0,pK=k>0?Math.round((gK/k)*100):0;document.getElementById('gan-propia').innerHTML=`Ganancia: <strong>${fmtCLP(gP)}</strong> (${pP}%)`;document.getElementById('gan-kin').innerHTML=`Ganancia: <strong>${fmtCLP(gK)}</strong> · Clínica: ${fmtCLP(k*0.5)} (${pK}%)`;document.getElementById('gan-lua').innerHTML=`Tarifa fija: <strong>${fmtCLP(l)}</strong>`;}
+function filterInsumos(f,btn){currentInsumoFilter=f;if(btn){document.querySelectorAll('#sec-insumos .sub-tab').forEach(t=>t.classList.remove('active'));btn.classList.add('active')}renderInsumos();}
+function renderInsumos(){
+  let ins=load('insumos');const bajo=ins.filter(i=>i.stock<=i.min&&i.min>0).length,valor=ins.reduce((s,i)=>s+(i.stock||0)*(i.cost||0),0),ganPot=ins.reduce((s,i)=>s+(i.stock||0)*((i.pricePropia||0)-(i.cost||0)),0);
+  document.getElementById('insumo-stats').innerHTML=`<div class="stat-card"><div class="stat-num">${ins.length}</div><div class="stat-lbl">productos</div></div><div class="stat-card"><div class="stat-num" style="color:${bajo?'var(--red)':'var(--green)'}">${bajo}</div><div class="stat-lbl">stock bajo</div></div><div class="stat-card"><div class="stat-num" style="font-size:15px">${fmtCLP(valor)}</div><div class="stat-lbl">valor inventario</div></div><div class="stat-card"><div class="stat-num" style="font-size:15px;color:var(--green)">${fmtCLP(ganPot)}</div><div class="stat-lbl">ganancia potencial</div></div>`;
+  if(currentInsumoFilter==='bajo')ins=ins.filter(i=>i.stock<=i.min&&i.min>0);else if(currentInsumoFilter!=='todos')ins=ins.filter(i=>i.cat===currentInsumoFilter);
+  if(!ins.length){document.getElementById('insumo-list').innerHTML='<div class="empty"><i class="ti ti-package"></i>Sin insumos</div>';return}
+  const cats=[...new Set(ins.map(i=>i.cat))].sort();
+  document.getElementById('insumo-list').innerHTML=cats.map(cat=>`<div style="margin-bottom:1rem"><h3>${cat}</h3>${ins.filter(i=>i.cat===cat).map(i=>{const pct=i.min>0?Math.min(100,Math.round((i.stock/i.min)*50)):100,barC=i.stock<=i.min?'var(--red)':i.stock<=i.min*2?'var(--amber)':'var(--green)',gP=(i.pricePropia||0)-(i.cost||0),gK=(i.priceKin||0)-(i.cost||0)-((i.priceKin||0)*0.5);return`<div class="insumo-row" onclick="openEditInsumo('${i.id}')"><div class="row" style="margin-bottom:4px"><div><span style="font-weight:600;font-size:13px">${i.name}</span>${i.supplier?`<span style="font-size:11px;color:var(--text3);margin-left:7px">${i.supplier}</span>`:''}</div><div style="display:flex;align-items:center;gap:5px"><span style="font-size:13px;font-weight:600">${i.stock} ${i.unit}</span>${i.stock<=i.min&&i.min>0?'<span class="tag tag-red">⚠ bajo</span>':''}</div></div><div class="stock-bar-bg"><div class="stock-bar" style="width:${pct}%;background:${barC}"></div></div><div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:.4rem;margin-top:.5rem;font-size:11px"><div><div style="color:var(--text3);margin-bottom:1px">Costo</div><div style="font-weight:600">${fmtCLP(i.cost)}</div></div><div><div style="color:var(--propia);margin-bottom:1px">🟢 Propia</div><div style="font-weight:600">${fmtCLP(i.pricePropia)} <span class="ganancia-pill">${fmtCLP(gP)}</span></div></div><div><div style="color:var(--kin);margin-bottom:1px">🔵 Kin</div><div style="font-weight:600">${fmtCLP(i.priceKin)} <span class="ganancia-pill" style="background:var(--kin-light);color:var(--kin)">${fmtCLP(gK)}</span></div></div></div>${i.priceLua?`<div style="font-size:11px;margin-top:3px;color:var(--lua)">🟣 Lua: <strong>${fmtCLP(i.priceLua)}</strong></div>`:''}${i.notes?`<div style="font-size:11px;color:var(--text3);margin-top:3px">${i.notes}</div>`:''}</div>`}).join('')}</div>`).join('');
+}
+function openNewInsumo(){editInsumoId=null;document.getElementById('insumo-modal-title').textContent='Nuevo insumo';document.getElementById('del-insumo-btn').style.display='none';['i-name','i-supplier','i-notes'].forEach(id=>document.getElementById(id).value='');['i-stock','i-min','i-cost','i-price-propia','i-price-kin','i-price-lua'].forEach(id=>document.getElementById(id).value=0);['gan-propia','gan-kin','gan-lua'].forEach(id=>document.getElementById(id).innerHTML='');document.getElementById('modal-insumo').classList.add('open');}
+function openEditInsumo(id){const i=load('insumos').find(x=>x.id===id);if(!i)return;editInsumoId=id;document.getElementById('insumo-modal-title').textContent='Editar — '+i.name;document.getElementById('del-insumo-btn').style.display='inline-flex';document.getElementById('i-name').value=i.name;document.getElementById('i-cat').value=i.cat;document.getElementById('i-unit').value=i.unit;document.getElementById('i-stock').value=i.stock;document.getElementById('i-min').value=i.min;document.getElementById('i-cost').value=i.cost;document.getElementById('i-price-propia').value=i.pricePropia||0;document.getElementById('i-price-kin').value=i.priceKin||0;document.getElementById('i-price-lua').value=i.priceLua||0;document.getElementById('i-supplier').value=i.supplier||'';document.getElementById('i-notes').value=i.notes||'';calcGanancias();document.getElementById('modal-insumo').classList.add('open');}
+function saveInsumo(){if(!document.getElementById('i-name').value.trim()){alert('Ingresa el nombre');return}const insumos=load('insumos');const item={id:editInsumoId||uid(),name:document.getElementById('i-name').value,cat:document.getElementById('i-cat').value,unit:document.getElementById('i-unit').value,stock:parseInt(document.getElementById('i-stock').value)||0,min:parseInt(document.getElementById('i-min').value)||0,cost:parseInt(document.getElementById('i-cost').value)||0,pricePropia:parseInt(document.getElementById('i-price-propia').value)||0,priceKin:parseInt(document.getElementById('i-price-kin').value)||0,priceLua:parseInt(document.getElementById('i-price-lua').value)||0,supplier:document.getElementById('i-supplier').value,notes:document.getElementById('i-notes').value};if(editInsumoId){const i=insumos.findIndex(x=>x.id===editInsumoId);insumos[i]=item}else insumos.push(item);save('insumos',insumos);closeModal('modal-insumo');renderInsumos();checkStockAlerts();}
+function deleteInsumo(){if(!confirm('¿Eliminar?'))return;save('insumos',load('insumos').filter(i=>i.id!==editInsumoId));closeModal('modal-insumo');renderInsumos();}
+
+/* PRESUPUESTOS */
+function renderBudgets(){const budgets=load('budgets'),patients=load('patients'),total=budgets.reduce((s,b)=>s+b.items.reduce((ss,it)=>ss+(it.qty||1)*(it.price||0),0),0),aprobados=budgets.filter(b=>b.status==='aprobado'||b.status==='pagado').length;document.getElementById('budget-stats').innerHTML=`<div class="stat-card"><div class="stat-num">${budgets.length}</div><div class="stat-lbl">presupuestos</div></div><div class="stat-card"><div class="stat-num">${aprobados}</div><div class="stat-lbl">aprobados</div></div><div class="stat-card"><div class="stat-num" style="font-size:15px">${fmtCLP(total)}</div><div class="stat-lbl">total cotizado</div></div>`;if(!budgets.length){document.getElementById('budget-list').innerHTML='<div class="empty"><i class="ti ti-receipt"></i>Sin presupuestos</div>';return}const stT={pendiente:'tag-blue',aprobado:'tag-gold',rechazado:'tag-red',pagado:'tag-green'},stL={pendiente:'Pendiente',aprobado:'Aprobado',rechazado:'Rechazado',pagado:'Pagado'};document.getElementById('budget-list').innerHTML=[...budgets].reverse().map(b=>{const p=patients.find(pt=>pt.id===b.patientId),tot=b.items.reduce((s,it)=>s+(it.qty||1)*(it.price||0),0),cl=b.clinic||'propia';return`<div class="insumo-row" onclick="openEditBudget('${b.id}')"><div class="row" style="margin-bottom:4px"><div style="display:flex;align-items:center;gap:7px"><span class="clinic-dot dot-${cl}"></span><span style="font-weight:600;font-size:13px">${p?p.name:'Paciente'}</span></div><span style="font-family:'Cormorant Garamond',serif;font-size:20px;font-weight:500;color:var(--gold)">${fmtCLP(tot)}</span></div><div style="font-size:11px;color:var(--text2);display:flex;gap:5px;flex-wrap:wrap;align-items:center"><span>${b.date||''}</span><span class="tag ${CLINIC_TAGS[cl]}">${CLINIC_LABELS[cl]}</span><span class="tag ${stT[b.status]||'tag-blue'}">${stL[b.status]||b.status}</span>${b.payment?`<span style="color:var(--text3)">${b.payment}</span>`:''}</div>${b.items.length?`<div style="font-size:11px;color:var(--text3);margin-top:4px">${b.items.map(it=>`${it.desc||'—'} ×${it.qty||1}`).join(' · ')}</div>`:''}</div>`}).join('');}
+function renderBudgetItems(){document.getElementById('budget-items').innerHTML=tempBudgetItems.length?tempBudgetItems.map((it,i)=>`<div class="budget-item-grid"><input type="text" value="${it.desc||''}" placeholder="Ej: Sculptra 2 viales" onchange="tempBudgetItems[${i}].desc=this.value" style="margin:0"><input type="number" value="${it.qty||1}" min="1" onchange="tempBudgetItems[${i}].qty=+this.value;calcBudgetTotal()" style="margin:0"><input type="number" value="${it.price||0}" min="0" onchange="tempBudgetItems[${i}].price=+this.value;calcBudgetTotal()" style="margin:0"><button class="btn btn-sm btn-danger" onclick="tempBudgetItems.splice(${i},1);renderBudgetItems()" style="padding:4px 7px;margin:0"><i class="ti ti-trash"></i></button></div>`).join(''):'<div style="font-size:12px;color:var(--text3);padding:.4rem 0">Sin ítems</div>';calcBudgetTotal();}
+function addBudgetItem(){tempBudgetItems.push({desc:'',qty:1,price:0});renderBudgetItems();}
+function calcBudgetTotal(){document.getElementById('b-total').textContent=fmtCLP(tempBudgetItems.reduce((s,it)=>s+(it.qty||1)*(it.price||0),0));}
+function openNewBudget(){editBudgetId=null;tempBudgetItems=[];document.getElementById('budget-modal-title').textContent='Nuevo presupuesto';document.getElementById('del-budget-btn').style.display='none';document.getElementById('b-date').value=today.toISOString().split('T')[0];document.getElementById('b-notes').value='';document.getElementById('b-status').value='pendiente';document.getElementById('b-payment').value='';fillPatientSelects();renderBudgetItems();document.getElementById('modal-budget').classList.add('open');}
+function openEditBudget(id){const b=load('budgets').find(x=>x.id===id);if(!b)return;editBudgetId=id;tempBudgetItems=[...b.items];document.getElementById('budget-modal-title').textContent='Editar presupuesto';document.getElementById('del-budget-btn').style.display='inline-flex';fillPatientSelects();setTimeout(()=>{document.getElementById('b-patient').value=b.patientId;document.getElementById('b-clinic').value=b.clinic||'propia';},0);document.getElementById('b-date').value=b.date;document.getElementById('b-status').value=b.status;document.getElementById('b-payment').value=b.payment||'';document.getElementById('b-notes').value=b.notes||'';renderBudgetItems();document.getElementById('modal-budget').classList.add('open');}
+function saveBudget(){const budgets=load('budgets');const b={id:editBudgetId||uid(),patientId:document.getElementById('b-patient').value,date:document.getElementById('b-date').value,clinic:document.getElementById('b-clinic').value,items:tempBudgetItems,status:document.getElementById('b-status').value,payment:document.getElementById('b-payment').value,notes:document.getElementById('b-notes').value};if(editBudgetId){const i=budgets.findIndex(x=>x.id===editBudgetId);budgets[i]=b}else budgets.push(b);save('budgets',budgets);closeModal('modal-budget');renderBudgets();}
+function deleteBudget(){if(!confirm('¿Eliminar?'))return;save('budgets',load('budgets').filter(b=>b.id!==editBudgetId));closeModal('modal-budget');renderBudgets();}
+
+/* PAGOS TRANSBANK */
+function loadTbkConfig(){
+  const cfg=JSON.parse(localStorage.getItem('dka_tbk_config')||'{}');
+  if(cfg.commerce&&cfg.apikey){
+    document.getElementById('tbk-commerce').value=cfg.commerce;
+    document.getElementById('tbk-apikey').value=cfg.apikey;
+    document.getElementById('tbk-status-badge').innerHTML='<span class="tag tag-green"><i class="ti ti-check"></i> Credenciales guardadas</span>';
+  } else {
+    document.getElementById('tbk-status-badge').innerHTML='<span class="tag tag-red">Sin configurar</span>';
+  }
+}
+function saveTbkConfig(){
+  const commerce=document.getElementById('tbk-commerce').value.trim();
+  const apikey=document.getElementById('tbk-apikey').value.trim();
+  if(!commerce||!apikey){alert('Ingresa ambas credenciales');return}
+  localStorage.setItem('dka_tbk_config',JSON.stringify({commerce,apikey}));
+  document.getElementById('tbk-status-badge').innerHTML='<span class="tag tag-green"><i class="ti ti-check"></i> Credenciales guardadas</span>';
+  alert('✅ Credenciales guardadas. Cuando Transbank active tu cuenta de producción, los links de pago funcionarán automáticamente.');
+}
+function fillPayPatientSelect(){
+  document.getElementById('pay-patient').innerHTML='<option value="">Seleccionar paciente...</option>'+load('patients').map(p=>`<option value="${p.id}" data-phone="${p.phone||''}" data-name="${p.name}">${p.name}</option>`).join('');
+}
+function updatePayPreview(){
+  const amount=parseInt(document.getElementById('pay-amount').value)||0;
+  const sel=document.getElementById('pay-patient');
+  const opt=sel.options[sel.selectedIndex];
+  const name=(opt&&opt.dataset.name)||'—';
+  const proc=document.getElementById('pay-proc').value;
+  const preview=document.getElementById('pay-preview');
+  if(amount>0){
+    preview.style.display='block';
+    document.getElementById('pay-preview-amount').textContent=fmtCLP(amount);
+    document.getElementById('pay-preview-patient').textContent=name;
+    document.getElementById('pay-preview-proc').textContent=proc;
+  } else {preview.style.display='none';}
+}
+function generatePayLink(){
+  const amount=parseInt(document.getElementById('pay-amount').value)||0;
+  const sel=document.getElementById('pay-patient');
+  const opt=sel.options[sel.selectedIndex];
+  const patientId=(opt&&opt.value)||'';
+  const phone=(opt&&opt.dataset.phone)||'';
+  const name=(opt&&opt.dataset.name)||'';
+  const proc=document.getElementById('pay-proc').value;
+  const clinic=document.getElementById('pay-clinic').value;
+  if(!amount){alert('Ingresa el monto');return}
+  if(!patientId){alert('Selecciona un paciente');return}
+  const cfg=JSON.parse(localStorage.getItem('dka_tbk_config')||'{}');
+  const orderId='KAT-'+uid().toUpperCase();
+  // Registro del pago pendiente
+  const payments=load('payments');
+  payments.push({id:uid(),patientId,patientName:name,amount,proc,clinic,orderId,status:'pendiente',date:today.toISOString().split('T')[0],createdAt:new Date().toISOString()});
+  save('payments',payments);
+  if(cfg.commerce&&cfg.apikey){
+    // Con credenciales reales de Transbank - aquí iría la llamada real a Webpay
+    const msg=`Hola ${name.split(' ')[0]} 💛 Tu link de pago para ${proc}:\n\n💳 Monto: ${fmtCLP(amount)}\n🔗 Ref: ${orderId}\n\nPor favor completa el pago para confirmar tu cita. ¡Gracias!`;
+    const cleaned=phone.replace(/[\s\-\(\)]/g,'');
+    if(phone)window.open(`https://wa.me/${cleaned.startsWith('+')?cleaned.slice(1):cleaned}?text=${encodeURIComponent(msg)}`,'_blank');
+    alert('⚠️ Transbank en modo producción requiere integración con tu servidor. El link será enviado una vez tengas la integración completa. El pago quedó registrado como pendiente.');
+  } else {
+    // Sin credenciales — modo demo con link de prueba
+    const msg=`Hola ${name.split(' ')[0]} 💛\n\nAquí está tu resumen de pago:\n\n💆‍♀️ Procedimiento: ${proc}\n💰 Total: ${fmtCLP(amount)}\n🏥 Clínica: ${CLINIC_LABELS[clinic]}\n📋 Ref: ${orderId}\n\nPara pagar, coordinaremos el método de pago al momento de tu cita. ¡Gracias por tu confianza! ✨`;
+    const cleaned=phone.replace(/[\s\-\(\)]/g,'');
+    if(phone){window.open(`https://wa.me/${cleaned.startsWith('+')?cleaned.slice(1):cleaned}?text=${encodeURIComponent(msg)}`,'_blank');}
+    else{navigator.clipboard&&navigator.clipboard.writeText(msg).then(()=>alert('✅ Mensaje copiado al portapapeles'));}
+    renderPayHistory();
+  }
+}
+function renderPayHistory(){
+  const payments=load('payments');
+  const patients=load('patients');
+  const totalCobrado=payments.filter(p=>p.status==='pagado').reduce((s,p)=>s+(p.amount||0),0);
+  const totalPendiente=payments.filter(p=>p.status==='pendiente').reduce((s,p)=>s+(p.amount||0),0);
+  document.getElementById('pay-stats').innerHTML=`<div class="stat-card"><div class="stat-num">${payments.length}</div><div class="stat-lbl">cobros generados</div></div><div class="stat-card"><div class="stat-num" style="font-size:15px;color:var(--green)">${fmtCLP(totalCobrado)}</div><div class="stat-lbl">cobrado</div></div><div class="stat-card"><div class="stat-num" style="font-size:15px;color:var(--amber)">${fmtCLP(totalPendiente)}</div><div class="stat-lbl">pendiente</div></div>`;
+  if(!payments.length){document.getElementById('pay-history').innerHTML='<div class="empty"><i class="ti ti-credit-card"></i>Sin cobros generados</div>';return}
+  document.getElementById('pay-history').innerHTML=[...payments].reverse().map(p=>{
+    const stT={pendiente:'tag-blue',pagado:'tag-green',fallido:'tag-red'};
+    return`<div class="insumo-row" onclick="togglePayStatus('${p.id}')">
+      <div class="row" style="margin-bottom:4px">
+        <div><span style="font-weight:600;font-size:13px">${p.patientName||'—'}</span><span style="font-size:11px;color:var(--text3);margin-left:7px">${p.date||''}</span></div>
+        <span style="font-family:'Cormorant Garamond',serif;font-size:18px;font-weight:500;color:var(--gold)">${fmtCLP(p.amount)}</span>
+      </div>
+      <div style="display:flex;align-items:center;gap:6px;flex-wrap:wrap;font-size:11px;color:var(--text2)">
+        <span>${p.proc||''}</span>
+        <span class="tag ${stT[p.status]||'tag-blue'}">${p.status}</span>
+        <span style="color:var(--text3)">Ref: ${p.orderId||''}</span>
+        <span style="font-size:10px;color:var(--text3);margin-left:auto">Toca para cambiar estado</span>
+      </div>
+    </div>`;}).join('');
+}
+function togglePayStatus(id){
+  const payments=load('payments');const i=payments.findIndex(p=>p.id===id);if(i<0)return;
+  const estados=['pendiente','pagado','fallido'];const curr=estados.indexOf(payments[i].status);
+  payments[i].status=estados[(curr+1)%estados.length];
+  save('payments',payments);renderPayHistory();
+}
+
+/* FINANZAS */
+function renderFinanzas(){
+  const period=document.getElementById('fin-period').value,now=new Date();
+  const appts=load('appts').filter(a=>{if(!a.date||!a.price||a.status!=='realizada')return false;const d=new Date(a.date+'T12:00');if(period==='mes')return d.getMonth()===now.getMonth()&&d.getFullYear()===now.getFullYear();if(period==='mes_ant'){const m=new Date(now.getFullYear(),now.getMonth()-1,1);return d.getMonth()===m.getMonth()&&d.getFullYear()===m.getFullYear();}if(period==='anio')return d.getFullYear()===now.getFullYear();return true;});
+  const totalIngreso=appts.reduce((s,a)=>s+(a.price||0),0),totalGan=appts.reduce((s,a)=>{const cl=a.clinic||'propia';if(cl==='kinelawen')return s+(a.price||0)*0.5;return s+(a.price||0);},0),totalCitas=appts.length,ticketProm=totalCitas>0?Math.round(totalIngreso/totalCitas):0;
+  document.getElementById('fin-stats').innerHTML=`<div class="stat-card"><div class="stat-num stat-num-gold" style="font-size:16px">${fmtCLP(totalIngreso)}</div><div class="stat-lbl">ingresos</div></div><div class="stat-card"><div class="stat-num" style="font-size:16px;color:var(--green)">${fmtCLP(totalGan)}</div><div class="stat-lbl">ganancia est.</div></div><div class="stat-card"><div class="stat-num">${totalCitas}</div><div class="stat-lbl">procedimientos</div></div><div class="stat-card"><div class="stat-num" style="font-size:16px">${fmtCLP(ticketProm)}</div><div class="stat-lbl">ticket promedio</div></div>`;
+  const clinics=['propia','kinelawen','lua'],clinicTotals=clinics.map(cl=>({cl,total:appts.filter(a=>(a.clinic||'propia')===cl).reduce((s,a)=>s+(a.price||0),0)})),maxCl=Math.max(...clinicTotals.map(c=>c.total),1);
+  document.getElementById('fin-clinicas').innerHTML=clinicTotals.map(c=>`<div style="margin-bottom:.65rem"><div class="row" style="margin-bottom:2px"><span style="font-size:12px;font-weight:600">${CLINIC_LABELS[c.cl]}</span><span style="font-size:12px;font-weight:700;color:var(--gold)">${fmtCLP(c.total)}</span></div><div class="fin-bar"><div class="fin-bar-fill" style="width:${Math.round((c.total/maxCl)*100)}%;background:var(--gold)"></div></div></div>`).join('');
+  const procMap={};appts.forEach(a=>{const k=a.proc||'Otro';procMap[k]=(procMap[k]||0)+(a.price||0);});const procs=Object.entries(procMap).sort((a,b)=>b[1]-a[1]).slice(0,6),maxP=Math.max(...procs.map(p=>p[1]),1);
+  document.getElementById('fin-procs').innerHTML=procs.length?procs.map(([k,v])=>`<div style="margin-bottom:.65rem"><div class="row" style="margin-bottom:2px"><span style="font-size:11px;font-weight:500;color:var(--text2)">${k}</span><span style="font-size:12px;font-weight:700">${fmtCLP(v)}</span></div><div class="fin-bar"><div class="fin-bar-fill" style="width:${Math.round((v/maxP)*100)}%;background:var(--propia)"></div></div></div>`).join(''):'<div class="empty" style="padding:1rem;font-size:12px">Sin datos</div>';
+  const payMap={};appts.forEach(a=>{if(a.payment){const k=a.payment;payMap[k]=(payMap[k]||0)+(a.price||0);}});const pays=Object.entries(payMap).sort((a,b)=>b[1]-a[1]),maxPay=Math.max(...pays.map(p=>p[1]),1);
+  document.getElementById('fin-pagos').innerHTML=pays.length?pays.map(([k,v])=>`<div style="margin-bottom:.65rem"><div class="row" style="margin-bottom:2px"><span style="font-size:11px;font-weight:500;color:var(--text2)">${k}</span><span style="font-size:12px;font-weight:700">${fmtCLP(v)}</span></div><div class="fin-bar"><div class="fin-bar-fill" style="width:${Math.round((v/maxPay)*100)}%;background:var(--kin)"></div></div></div>`).join(''):'<div class="empty" style="padding:1rem;font-size:12px">Sin datos</div>';
+  const monthMap={};load('appts').filter(a=>a.price&&a.status==='realizada').forEach(a=>{const d=new Date(a.date+'T12:00');const k=`${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}`;monthMap[k]=(monthMap[k]||0)+(a.price||0);});const months=Object.entries(monthMap).sort((a,b)=>a[0].localeCompare(b[0])).slice(-12),maxM=Math.max(...months.map(m=>m[1]),1);
+  document.getElementById('fin-history').innerHTML=months.length?`<div style="display:flex;align-items:flex-end;gap:5px;height:80px;margin-bottom:.5rem">${months.map(([k,v])=>`<div style="flex:1;display:flex;flex-direction:column;align-items:center"><div style="width:100%;background:var(--gold);border-radius:3px 3px 0 0;height:${Math.round((v/maxM)*72)}px;min-height:4px;transition:height .4s" title="${fmtCLP(v)}"></div></div>`).join('')}</div><div style="display:flex;gap:5px">${months.map(([k])=>{const[y,m]=k.split('-');return`<div style="flex:1;text-align:center;font-size:9px;color:var(--text3)">${MONTHS[parseInt(m)-1].slice(0,3)}</div>`}).join('')}</div>`:'<div class="empty" style="padding:1rem;font-size:12px">Las citas marcadas como "Realizada" con precio aparecerán aquí.</div>';
+}
+
+/* MENSAJES */
+function fillMsgPatientSelect(){document.getElementById('msg-patient-select').innerHTML='<option value="">Seleccionar paciente...</option>'+load('patients').map(p=>`<option value="${p.id}" data-phone="${p.phone||''}" data-name="${p.name}">${p.name}</option>`).join('');}
+function filterMsgs(f,btn){currentMsgFilter=f;if(btn){document.querySelectorAll('#sec-mensajes .sub-tab').forEach(t=>t.classList.remove('active'));btn.classList.add('active')}renderMsgs();}
+function renderMsgs(){
+  let msgs=load('msgs');if(currentMsgFilter!=='todos')msgs=msgs.filter(m=>m.cat===currentMsgFilter);
+  const catC={Recordatorio:'tag-blue',Confirmación:'tag-gold','Post procedimiento':'tag-green',Promoción:'tag-purple',Otro:'tag-blue'};
+  document.getElementById('msg-list').innerHTML=msgs.length?msgs.map(m=>`<div class="msg-card"><div class="row"><div style="display:flex;align-items:center;gap:7px"><span class="tag ${catC[m.cat]||'tag-blue'}">${m.cat}</span><span style="font-weight:600;font-size:13px">${m.name}</span></div><div style="display:flex;gap:5px"><button class="btn btn-sm btn-outline" onclick="openEditMsg('${m.id}');event.stopPropagation()"><i class="ti ti-edit"></i></button><button class="wa-btn" onclick="sendWhatsApp('${m.id}');event.stopPropagation()"><i class="ti ti-brand-whatsapp"></i> Enviar</button></div></div><div class="msg-preview">${m.body}</div></div>`).join(''):'<div class="empty"><i class="ti ti-message-off"></i>Sin mensajes</div>';
+}
+function sendWhatsApp(msgId){const sel=document.getElementById('msg-patient-select');const opt=sel.options[sel.selectedIndex];const phone=(opt&&opt.dataset.phone)||'';const name=(opt&&opt.dataset.name)||'';if(!phone){alert('Selecciona un paciente con WhatsApp registrado');return}const msg=load('msgs').find(m=>m.id===msgId);if(!msg)return;const body=msg.body.replace(/{nombre}/g,name.split(' ')[0]);const cleaned=phone.replace(/[\s\-\(\)]/g,'');window.open(`https://wa.me/${cleaned.startsWith('+')?cleaned.slice(1):cleaned}?text=${encodeURIComponent(body)}`,'_blank');}
+function openNewMsg(){editMsgId=null;document.getElementById('msg-modal-title').textContent='Nuevo mensaje';document.getElementById('del-msg-btn').style.display='none';document.getElementById('m-name').value='';document.getElementById('m-body').value='';document.getElementById('m-cat').value='Recordatorio';document.getElementById('modal-msg').classList.add('open');}
+function openEditMsg(id){const m=load('msgs').find(x=>x.id===id);if(!m)return;editMsgId=id;document.getElementById('msg-modal-title').textContent='Editar mensaje';document.getElementById('del-msg-btn').style.display='inline-flex';document.getElementById('m-name').value=m.name;document.getElementById('m-cat').value=m.cat;document.getElementById('m-body').value=m.body;document.getElementById('modal-msg').classList.add('open');}
+function saveMsg(){if(!document.getElementById('m-name').value.trim()){alert('Ponle un nombre');return}const msgs=load('msgs');const m={id:editMsgId||uid(),name:document.getElementById('m-name').value,cat:document.getElementById('m-cat').value,body:document.getElementById('m-body').value};if(editMsgId){const i=msgs.findIndex(x=>x.id===editMsgId);msgs[i]=m}else msgs.push(m);save('msgs',msgs);closeModal('modal-msg');renderMsgs();}
+function deleteMsg(){if(!confirm('¿Eliminar?'))return;save('msgs',load('msgs').filter(m=>m.id!==editMsgId));closeModal('modal-msg');renderMsgs();}
+
+document.querySelectorAll('.modal-bg').forEach(m=>m.addEventListener('click',function(e){if(e.target===this)closeModal(this.id)}));
+
+initDefaultMsgs();
+syncFromCloud();
+</script>
+</body>
+</html>
